@@ -21,7 +21,7 @@ namespace PersonalPortfolio.Shared.Storage.Sqlite
             ctxOptionsBuilder
                 .UseSqlite(_connectionString, o => o.MigrationsAssembly(typeof(PortfolioDbContextFactory).Assembly.FullName));
 
-            return new PortfolioDbContext(ctxOptionsBuilder.Options);
+            return new PortfolioDbContext(ctxOptionsBuilder.Options, null);
         }
     }
 }

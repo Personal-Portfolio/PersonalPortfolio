@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PersonalPortfolio.Shared.Storage.Sqlite;
+using PersonalPortfolio.Shared.Storage.SqlServer;
 using Serilog;
 
 namespace PersonalPortfolio.RatesLoader

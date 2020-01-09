@@ -27,7 +27,10 @@ namespace PersonalPortfolio.Shared.Storage.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300)
+                        .HasDefaultValue("");
 
                     b.HasKey("Id");
 
@@ -67,13 +70,13 @@ namespace PersonalPortfolio.Shared.Storage.Migrations
                     b.HasOne("PersonalPortfolio.Shared.Storage.Security", "SourceSymbol")
                         .WithMany()
                         .HasForeignKey("SourceSymbolId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("PersonalPortfolio.Shared.Storage.Security", "TargetSymbol")
                         .WithMany()
                         .HasForeignKey("TargetSymbolId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

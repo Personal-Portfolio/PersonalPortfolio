@@ -13,7 +13,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 300, nullable: true, defaultValue: "")
                 },
                 constraints: table =>
                 {
@@ -38,14 +38,12 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                         name: "FK_Rates_Securities_SourceSymbolId",
                         column: x => x.SourceSymbolId,
                         principalTable: "Securities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Rates_Securities_TargetSymbolId",
                         column: x => x.TargetSymbolId,
                         principalTable: "Securities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
