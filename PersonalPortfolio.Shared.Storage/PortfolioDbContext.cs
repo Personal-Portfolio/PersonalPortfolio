@@ -20,6 +20,8 @@ namespace PersonalPortfolio.Shared.Storage
         }
 
         public DbSet<Security> Securities { get; set; }
-        public DbSet<SymbolRate> Rates { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        //public DbSet<SecurityRate> SecurityRates { get; set; }
+        public DbSet<CurrencyRate> CurrencyRates { get; set; }
     }
 }

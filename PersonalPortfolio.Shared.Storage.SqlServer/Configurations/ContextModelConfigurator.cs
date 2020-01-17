@@ -7,7 +7,9 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
         public void Configure(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new SecurityConfiguration());
-            builder.ApplyConfiguration(new SymbolRateConfiguration());
+            builder.ApplyConfiguration(new SecurityTypeConfiguration());
+            builder.ApplyConfiguration(new CurrencyConfiguration());
+            builder.ApplyConfiguration(new CurrencyRateConfiguration());
         }
     }
 }

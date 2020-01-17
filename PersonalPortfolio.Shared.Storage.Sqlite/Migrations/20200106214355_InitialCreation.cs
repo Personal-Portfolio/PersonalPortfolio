@@ -8,10 +8,10 @@ namespace PersonalPortfolio.Shared.Storage.Sqlite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Securities",
-                columns: table => new
+                "Securities",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -21,51 +21,51 @@ namespace PersonalPortfolio.Shared.Storage.Sqlite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rates",
-                columns: table => new
+                "Rates",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("Sqlite:Autoincrement", true),
-                    TargetSymbolId = table.Column<int>(nullable: false),
-                    SourceSymbolId = table.Column<int>(nullable: false),
-                    RateTime = table.Column<DateTime>(nullable: false),
-                    Value = table.Column<float>(nullable: false)
+                    TargetSymbolId = table.Column<int>(),
+                    SourceSymbolId = table.Column<int>(),
+                    RateTime = table.Column<DateTime>(),
+                    Value = table.Column<float>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rates_Securities_SourceSymbolId",
-                        column: x => x.SourceSymbolId,
-                        principalTable: "Securities",
-                        principalColumn: "Id",
+                        "FK_Rates_Securities_SourceSymbolId",
+                        x => x.SourceSymbolId,
+                        "Securities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rates_Securities_TargetSymbolId",
-                        column: x => x.TargetSymbolId,
-                        principalTable: "Securities",
-                        principalColumn: "Id",
+                        "FK_Rates_Securities_TargetSymbolId",
+                        x => x.TargetSymbolId,
+                        "Securities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rates_SourceSymbolId",
-                table: "Rates",
-                column: "SourceSymbolId");
+                "IX_Rates_SourceSymbolId",
+                "Rates",
+                "SourceSymbolId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rates_TargetSymbolId",
-                table: "Rates",
-                column: "TargetSymbolId");
+                "IX_Rates_TargetSymbolId",
+                "Rates",
+                "TargetSymbolId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Rates");
+                "Rates");
 
             migrationBuilder.DropTable(
-                name: "Securities");
+                "Securities");
         }
     }
 }

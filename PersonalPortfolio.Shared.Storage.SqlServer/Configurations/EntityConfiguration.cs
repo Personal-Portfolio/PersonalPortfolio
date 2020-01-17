@@ -9,8 +9,9 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(e => e.Id);
-            //builder.Property(m => m.DateCreated).HasColumnType(DataConstants.SqlServer.DateTime2).HasDefaultValueSql(DataConstants.SqlServer.SysDateTime);
-            //builder.Property(p => p.DateUpdated).HasColumnType(DataConstants.SqlServer.DateTime2);
+            builder.Property(e => e.Id).UseIdentityColumn();
+            builder.Property(m => m.DateCreated).HasColumnType(Constants.DateTime2).HasDefaultValueSql(Constants.SysDateTime);
+            builder.Property(p => p.DateUpdated).HasColumnType(Constants.DateTime2);
         }
     }
 }

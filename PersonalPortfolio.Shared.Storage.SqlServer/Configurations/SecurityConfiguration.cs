@@ -8,7 +8,12 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
         public override void Configure(EntityTypeBuilder<Security> builder)
         {
             builder.ToTable("Securities");
-            builder.Property(p => p.Name).HasMaxLength(300).HasDefaultValue("");
+            builder.Property(p => p.Ticker).HasMaxLength(300).HasDefaultValue("");
+
+            builder.HasOne(security => security.Type)
+                .WithMany()
+                .HasForeignKey(security => security.TypeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.Configure(builder);
         }
