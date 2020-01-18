@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using PersonalPortfolio.Shared.Storage.Abstractions;
 
 namespace PersonalPortfolio.Shared.Storage.Sqlite
 {

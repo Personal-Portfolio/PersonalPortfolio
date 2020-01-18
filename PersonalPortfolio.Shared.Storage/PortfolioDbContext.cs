@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using PersonalPortfolio.Shared.Storage.Abstractions;
 
 namespace PersonalPortfolio.Shared.Storage
 {
@@ -21,7 +22,7 @@ namespace PersonalPortfolio.Shared.Storage
 
         public DbSet<Security> Securities { get; set; }
         public DbSet<Currency> Currencies { get; set; }
-        //public DbSet<SecurityRate> SecurityRates { get; set; }
+        public DbSet<SecurityPrice> SecurityPrices { get; set; }
         public DbSet<CurrencyRate> CurrencyRates { get; set; }
     }
 }

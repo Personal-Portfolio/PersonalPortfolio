@@ -17,7 +17,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -119,16 +119,23 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");
 
-                    b.Property<string>("Ticker")
+                    b.Property<string>("Description")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300)
                         .HasDefaultValue("");
 
+                    b.Property<string>("Ticker")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
+
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Ticker");
 
                     b.HasIndex("BaseCurrencyId");
 
@@ -142,6 +149,8 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Average")
@@ -150,11 +159,16 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<decimal>("Close")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2(2)")
+                        .HasDefaultValueSql("sysdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(2)");
 
                     b.Property<decimal>("High")
                         .HasColumnType("decimal(18,2)");
@@ -169,13 +183,17 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TradeDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("TradeDate", "SecurityId");
+
+                    b.HasIndex("CurrencyId");
+
                     b.HasIndex("SecurityId");
 
-                    b.ToTable("SecurityPrice");
+                    b.ToTable("SecurityPrices");
                 });
 
             modelBuilder.Entity("PersonalPortfolio.Shared.Storage.SecurityType", b =>
@@ -223,7 +241,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.HasOne("PersonalPortfolio.Shared.Storage.Currency", "BaseCurrency")
                         .WithMany()
                         .HasForeignKey("BaseCurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("PersonalPortfolio.Shared.Storage.SecurityType", "Type")
@@ -235,10 +253,16 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
 
             modelBuilder.Entity("PersonalPortfolio.Shared.Storage.SecurityPrice", b =>
                 {
+                    b.HasOne("PersonalPortfolio.Shared.Storage.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("PersonalPortfolio.Shared.Storage.Security", "Security")
                         .WithMany("Prices")
                         .HasForeignKey("SecurityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -1,15 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalPortfolio.Shared.Core;
+using PersonalPortfolio.Shared.Storage.Abstractions;
+using PersonalPortfolio.Shared.Storage.Projections;
+using PersonalPortfolio.Shared.Storage.Queries;
 using PersonalPortfolio.Shared.Storage.SqlServer.Configurations;
 
 namespace PersonalPortfolio.Shared.Storage.SqlServer
 {
     public static class ServicesCollectionsExtensions
     {
-        public static IServiceCollection AddContextFactory(this IServiceCollection services)
+        public static IServiceCollection AddPortfolioSqlStorageServices(this IServiceCollection services)
         {
             services.AddTransient<IContextModelConfigurator, ContextModelConfigurator>();
             services.AddTransient<IContextFactory<PortfolioDbContext>, PortfolioDbContextFactory>();
+            services.AddTransient<IMapper<Security, SecurityInfo>, SecurityInfoMapper>();
+            services.AddTransient<ISecurityQueryService, SecurityQueryService>();
 
             return services;
         }

@@ -2,6 +2,8 @@
 {
     public interface ISymbol
     {
-        string Name { get; set; }
+        string Code { get; set; }
+
+        string Description { get; set; }
     }
 }

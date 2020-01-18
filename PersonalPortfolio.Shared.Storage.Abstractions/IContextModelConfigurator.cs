@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PersonalPortfolio.Shared.Storage
+namespace PersonalPortfolio.Shared.Storage.Abstractions
 {
     public interface IContextModelConfigurator
     {

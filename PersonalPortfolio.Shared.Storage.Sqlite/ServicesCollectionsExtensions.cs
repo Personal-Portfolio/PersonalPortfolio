@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalPortfolio.Shared.Storage.Abstractions;
 
 namespace PersonalPortfolio.Shared.Storage.Sqlite
 {

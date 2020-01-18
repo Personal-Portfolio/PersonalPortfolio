@@ -2,9 +2,10 @@
 
 namespace PersonalPortfolio.Shared.Storage
 {
-    public class SecurityPrice: Entity
+    public class SecurityPrice: CurrencyLinkedEntity
     {
         public int SecurityId { get; set; }
+
         public Security Security { get; set; }
 
         public DateTime TradeDate { get; set; }

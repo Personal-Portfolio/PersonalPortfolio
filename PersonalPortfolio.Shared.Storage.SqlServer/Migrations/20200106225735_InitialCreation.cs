@@ -77,19 +77,20 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
-                    Ticker = table.Column<string>(maxLength: 300, nullable: true, defaultValue: ""),
+                    Ticker = table.Column<string>(maxLength: 64, nullable: false),
+                    Description = table.Column<string>(maxLength: 300, nullable: true, defaultValue: ""),
                     TypeId = table.Column<int>(nullable: false),
                     BaseCurrencyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Securities", x => x.Id);
+                    table.UniqueConstraint("AK_Securities_Ticker", x => x.Ticker);
                     table.ForeignKey(
                         name: "FK_Securities_Currencies_BaseCurrencyId",
                         column: x => x.BaseCurrencyId,
                         principalTable: "Currencies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Securities_SecurityTypes_TypeId",
                         column: x => x.TypeId,
@@ -98,15 +99,16 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SecurityPrice",
+                name: "SecurityPrices",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateUpdated = table.Column<DateTime>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
+                    CurrencyId = table.Column<int>(nullable: false),
                     SecurityId = table.Column<int>(nullable: false),
-                    TradeDate = table.Column<DateTime>(nullable: false),
+                    TradeDate = table.Column<DateTime>(type: "date", nullable: false),
                     Average = table.Column<decimal>(nullable: false),
                     Open = table.Column<decimal>(nullable: false),
                     Close = table.Column<decimal>(nullable: false),
@@ -115,13 +117,18 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SecurityPrice", x => x.Id);
+                    table.PrimaryKey("PK_SecurityPrices", x => x.Id);
+                    table.UniqueConstraint("AK_SecurityPrices_TradeDate_SecurityId", x => new { x.TradeDate, x.SecurityId });
                     table.ForeignKey(
-                        name: "FK_SecurityPrice_Securities_SecurityId",
+                        name: "FK_SecurityPrices_Currencies_CurrencyId",
+                        column: x => x.CurrencyId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SecurityPrices_Securities_SecurityId",
                         column: x => x.SecurityId,
                         principalTable: "Securities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -145,8 +152,13 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SecurityPrice_SecurityId",
-                table: "SecurityPrice",
+                name: "IX_SecurityPrices_CurrencyId",
+                table: "SecurityPrices",
+                column: "CurrencyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SecurityPrices_SecurityId",
+                table: "SecurityPrices",
                 column: "SecurityId");
         }
 
@@ -156,7 +168,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 name: "CurrencyRates");
 
             migrationBuilder.DropTable(
-                name: "SecurityPrice");
+                name: "SecurityPrices");
 
             migrationBuilder.DropTable(
                 name: "Securities");

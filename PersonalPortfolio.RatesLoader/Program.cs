@@ -30,7 +30,7 @@ namespace PersonalPortfolio.RatesLoader
                 .ConfigureServices((hostingContext, services) =>
                     {
                         services
-                            .AddContextFactory()
+                            .AddPortfolioSqlStorageServices()
                             .AddHostedService<LoaderHostedService>();
                     });
 

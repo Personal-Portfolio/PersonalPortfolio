@@ -7,15 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Shared.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Shared.Storage", "PersonalPortfolio.Shared.Storage\PersonalPortfolio.Shared.Storage.csproj", "{535EEB54-B1B2-4727-8647-958BD5CA8BFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalPortfolio.Shared.Abstractions", "PersonalPortfolio.Shared.Abstractions\PersonalPortfolio.Shared.Abstractions.csproj", "{A3E1D995-5E61-40E4-A28A-7F4924682995}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Shared.Abstractions", "PersonalPortfolio.Shared.Abstractions\PersonalPortfolio.Shared.Abstractions.csproj", "{A3E1D995-5E61-40E4-A28A-7F4924682995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalPortfolio.Tests", "PersonalPortfolio.Tests\PersonalPortfolio.Tests.csproj", "{3B961518-A762-43DB-9766-C31808163A31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Tests", "PersonalPortfolio.Tests\PersonalPortfolio.Tests.csproj", "{3B961518-A762-43DB-9766-C31808163A31}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.RatesLoader", "PersonalPortfolio.RatesLoader\PersonalPortfolio.RatesLoader.csproj", "{6FD67859-80D1-41DA-8716-8178B4F0DDFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalPortfolio.Shared.Storage.Sqlite", "PersonalPortfolio.Shared.Storage.Sqlite\PersonalPortfolio.Shared.Storage.Sqlite.csproj", "{EDF364C4-2376-4D3C-BC09-D295DFB0DCA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Shared.Storage.Sqlite", "PersonalPortfolio.Shared.Storage.Sqlite\PersonalPortfolio.Shared.Storage.Sqlite.csproj", "{EDF364C4-2376-4D3C-BC09-D295DFB0DCA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalPortfolio.Shared.Storage.SqlServer", "PersonalPortfolio.Shared.Storage.SqlServer\PersonalPortfolio.Shared.Storage.SqlServer.csproj", "{24DD98BE-7A47-46B6-BFBB-E2E95BEDF0BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalPortfolio.Shared.Storage.SqlServer", "PersonalPortfolio.Shared.Storage.SqlServer\PersonalPortfolio.Shared.Storage.SqlServer.csproj", "{24DD98BE-7A47-46B6-BFBB-E2E95BEDF0BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

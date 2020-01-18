@@ -9,9 +9,11 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
         {
             builder.ToTable("Currencies");
             builder.HasAlternateKey(u => u.Code);
+
             builder.Property(p => p.Code)
                 .HasMaxLength(4)
                 .IsRequired();
+
             builder.Property(p => p.Description)
                 .HasMaxLength(300)
                 .HasDefaultValue("");
