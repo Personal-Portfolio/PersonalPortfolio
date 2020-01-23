@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
+namespace PersonalPortfolio.Shared.Storage.SqlServer.Configuration.Model
 {
     internal class CurrencyRateConfiguration : CurrencyLinkedEntityConfiguration<CurrencyRate>
     {
@@ -18,6 +18,8 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
                 .WithMany(symbol => symbol.Rates)
                 .HasForeignKey(security => security.SourceCurrencyId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(e => e.Value).HasColumnType(Constants.Decimal);
 
             base.Configure(builder);
         }

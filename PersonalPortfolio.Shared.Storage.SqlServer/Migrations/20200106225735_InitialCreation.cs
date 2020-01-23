@@ -13,7 +13,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysutcdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
                     Code = table.Column<string>(maxLength: 4, nullable: false),
                     Description = table.Column<string>(maxLength: 300, nullable: true, defaultValue: "")
@@ -30,7 +30,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysutcdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -45,11 +45,11 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysutcdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
                     CurrencyId = table.Column<int>(nullable: false),
                     RateTime = table.Column<DateTime>(type: "date", nullable: false),
-                    Value = table.Column<decimal>(nullable: false),
+                    Value = table.Column<decimal>(type: "decimal(9,5)", nullable: false),
                     SourceCurrencyId = table.Column<int>(nullable: false),
                     DataSourceId = table.Column<int>(nullable: false)
                 },
@@ -75,7 +75,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysutcdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
                     Ticker = table.Column<string>(maxLength: 64, nullable: false),
                     Description = table.Column<string>(maxLength: 300, nullable: true, defaultValue: ""),
@@ -104,16 +104,16 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysdatetime()"),
+                    DateCreated = table.Column<DateTime>(type: "datetime2(2)", nullable: false, defaultValueSql: "sysutcdatetime()"),
                     DateUpdated = table.Column<DateTime>(type: "datetime2(2)", nullable: true),
                     CurrencyId = table.Column<int>(nullable: false),
                     SecurityId = table.Column<int>(nullable: false),
                     TradeDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Average = table.Column<decimal>(nullable: false),
-                    Open = table.Column<decimal>(nullable: false),
-                    Close = table.Column<decimal>(nullable: false),
-                    Low = table.Column<decimal>(nullable: false),
-                    High = table.Column<decimal>(nullable: false)
+                    Average = table.Column<decimal>(type: "decimal(9,5)", nullable: false),
+                    Open = table.Column<decimal>(type: "decimal(9,5)", nullable: false),
+                    Close = table.Column<decimal>(type: "decimal(9,5)", nullable: false),
+                    Low = table.Column<decimal>(type: "decimal(9,5)", nullable: false),
+                    High = table.Column<decimal>(type: "decimal(9,5)", nullable: false)
                 },
                 constraints: table =>
                 {

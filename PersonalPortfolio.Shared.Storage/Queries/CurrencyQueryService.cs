@@ -8,33 +8,29 @@ using PersonalPortfolio.Shared.Storage.Abstractions;
 
 namespace PersonalPortfolio.Shared.Storage.Queries
 {
-    public class SecurityQueryService : ISecurityQueryService
+    public class CurrencyQueryService : ICurrencyQueryService
     {
         private readonly PortfolioDbContext _ctx;
-        private readonly IMapper<Security, SecurityInfo> _mapper;
+        private readonly IMapper<Currency, CurrencyInfo> _mapper;
 
-        public SecurityQueryService(PortfolioDbContext ctx, IMapper<Security, SecurityInfo> mapper)
+        public CurrencyQueryService(PortfolioDbContext ctx, IMapper<Currency, CurrencyInfo> mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
         }
 
-        public async Task<SecurityInfo> GetSecurityInfoByCodeAsync(string code, CancellationToken token)
+        public async Task<CurrencyInfo> GetCurrencyInfoByCodeAsync(string code, CancellationToken token)
         {
-            return await _ctx.Securities
-                .Where(s => s.Ticker == code)
-                .Include(s => s.Type)
-                .Include(s => s.BaseCurrency)
+            return await _ctx.Currencies
+                .Where(s => s.Code == code)
                 .Select(_mapper.GetProjection())
                 .FirstOrDefaultAsync(token)
                 .ConfigureAwait(false);
         }
 
-        public async Task<List<SecurityInfo>> GetAllSecurityInfosAsync(CancellationToken token)
+        public async Task<List<CurrencyInfo>> GetRegisteredCurrenciesAsync(CancellationToken token)
         {
-            return await _ctx.Securities
-                .Include(s => s.Type)
-                .Include(s => s.BaseCurrency)
+            return await _ctx.Currencies
                 .Select(_mapper.GetProjection())
                 .ToListAsync(token)
                 .ConfigureAwait(false);

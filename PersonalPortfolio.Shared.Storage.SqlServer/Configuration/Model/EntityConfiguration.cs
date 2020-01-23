@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
+namespace PersonalPortfolio.Shared.Storage.SqlServer.Configuration.Model
 {
     public abstract class EntityConfiguration<T> : IEntityTypeConfiguration<T>
         where T : Entity

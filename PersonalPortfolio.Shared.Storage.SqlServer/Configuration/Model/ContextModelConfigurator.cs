@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalPortfolio.Shared.Storage.Abstractions;
 
-namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
+namespace PersonalPortfolio.Shared.Storage.SqlServer.Configuration.Model
 {
     internal class ContextModelConfigurator: IContextModelConfigurator
     {

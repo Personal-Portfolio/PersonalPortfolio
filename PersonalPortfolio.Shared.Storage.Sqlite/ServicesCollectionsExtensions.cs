@@ -8,7 +8,7 @@ namespace PersonalPortfolio.Shared.Storage.Sqlite
     {
         public static IServiceCollection AddContextFactory(this IServiceCollection services)
         {
-            services.AddTransient<IContextFactory<PortfolioDbContext>, PortfolioDbContextFactory>();
+            //services.AddTransient<IContextFactory<PortfolioDbContext>, PortfolioDbContextFactory>();
 
             return services;
         }

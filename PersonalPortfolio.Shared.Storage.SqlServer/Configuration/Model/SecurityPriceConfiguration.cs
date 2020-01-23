@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
+namespace PersonalPortfolio.Shared.Storage.SqlServer.Configuration.Model
 {
     internal class SecurityPriceConfiguration : CurrencyLinkedEntityConfiguration<SecurityPrice>
     {
@@ -18,6 +18,12 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Configurations
                 .WithMany(security => security.Prices)
                 .HasForeignKey(price => price.SecurityId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(e => e.Average).HasColumnType(Constants.Decimal);
+            builder.Property(e => e.Open).HasColumnType(Constants.Decimal);
+            builder.Property(e => e.Close).HasColumnType(Constants.Decimal);
+            builder.Property(e => e.High).HasColumnType(Constants.Decimal);
+            builder.Property(e => e.Low).HasColumnType(Constants.Decimal);
 
             base.Configure(builder);
         }

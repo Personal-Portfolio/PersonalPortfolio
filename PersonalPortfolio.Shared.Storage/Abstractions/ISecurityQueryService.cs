@@ -7,7 +7,7 @@ namespace PersonalPortfolio.Shared.Storage.Abstractions
 {
     public interface ISecurityQueryService
     {
-        Task<SecurityInfo> GetSecurityInfoByCode(string code, CancellationToken token);
-        Task<List<SecurityInfo>> GetAllSecurityInfos(CancellationToken token);
+        Task<SecurityInfo> GetSecurityInfoByCodeAsync(string code, CancellationToken token);
+        Task<List<SecurityInfo>> GetAllSecurityInfosAsync(CancellationToken token);
     }
 }
