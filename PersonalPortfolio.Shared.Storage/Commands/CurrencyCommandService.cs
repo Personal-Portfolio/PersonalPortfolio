@@ -78,7 +78,7 @@ namespace PersonalPortfolio.Shared.Storage.Commands
 
             var entities = new List<CurrencyRate>();
 
-            foreach (var (dateTime, sourceCode, targetCode, value, dataSourceId) in rates)
+            foreach (var (rateDate, sourceCode, targetCode, value, dataSourceId) in rates)
             {
                 if (!currencyMap.ContainsKey(sourceCode) || !currencyMap.ContainsKey(targetCode))
                 {
@@ -89,17 +89,20 @@ namespace PersonalPortfolio.Shared.Storage.Commands
                 var sourceId = currencyMap[sourceCode];
                 var targetId = currencyMap[targetCode];
 
-                if (currencyTimestamps.TryGetValue((sourceId, targetId, 0), out var date) && date < date.Date)
+                if (currencyTimestamps.TryGetValue((sourceId, targetId, 0), out var date) && date >= rateDate.Date)
                 {
-                    entities.Add(new CurrencyRate
-                    {
-                        SourceCurrencyId = sourceId,
-                        CurrencyId = targetId,
-                        RateTime = dateTime.Date,
-                        Value = value,
-                        DataSourceId = 0 // TODO: dataSourceId
-                    });
+                    continue;
                 }
+
+                entities.Add(new CurrencyRate
+                {
+                    DateCreated = DateTime.UtcNow,
+                    SourceCurrencyId = sourceId,
+                    CurrencyId = targetId,
+                    RateTime = rateDate.Date,
+                    Value = value,
+                    DataSourceId = 0 // TODO: dataSourceId
+                });
             }
 
             return await InsertEntities(entities, token);
