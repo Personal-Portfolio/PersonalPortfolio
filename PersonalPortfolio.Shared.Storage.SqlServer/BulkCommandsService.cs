@@ -48,7 +48,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer
                     p => _logger.LogDebug($"Inserting entities of {typeof(T)}. Progress: {(p * 100).ToString("F2", CultureInfo.InvariantCulture) + "%"}"),
                     token)
                 .ConfigureAwait(false);
-
+            
             await transaction.CommitAsync(token).ConfigureAwait(false);
 
             return config.StatsInfo.StatsNumberInserted;

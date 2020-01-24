@@ -73,7 +73,7 @@ namespace PersonalPortfolio.Shared.Storage.Commands
             var currencyTimestamps = await _ctx.CurrencyRates
                 .GroupBy(e => new { e.SourceCurrencyId, e.CurrencyId, e.DataSourceId })
                 .Select(g => new { g.Key, Value = g.Max(e => e.RateTime) })
-                .ToDictionaryAsync(e => e.Key, e => e.Value, token)
+                .ToDictionaryAsync(e => (e.Key.SourceCurrencyId, e.Key.CurrencyId, e.Key.DataSourceId), e => e.Value, token)
                 .ConfigureAwait(false);
 
             var entities = new List<CurrencyRate>();
@@ -89,19 +89,31 @@ namespace PersonalPortfolio.Shared.Storage.Commands
                 var sourceId = currencyMap[sourceCode];
                 var targetId = currencyMap[targetCode];
 
-                entities.Add(new CurrencyRate
+                if (currencyTimestamps.TryGetValue((sourceId, targetId, 0), out var date) && date < date.Date)
                 {
-                    SourceCurrencyId = sourceId,
-                    CurrencyId = targetId,
-                    RateTime = dateTime.Date,
-                    Value = value,
-                    DataSourceId = 0 // TODO: dataSourceId
-                });
+                    entities.Add(new CurrencyRate
+                    {
+                        SourceCurrencyId = sourceId,
+                        CurrencyId = targetId,
+                        RateTime = dateTime.Date,
+                        Value = value,
+                        DataSourceId = 0 // TODO: dataSourceId
+                    });
+                }
             }
 
+            return await InsertEntities(entities, token);
+        }
+
+        private async Task<int> InsertEntities(List<CurrencyRate> entities, CancellationToken token)
+        {
             int counter;
 
-            if (_bulkCommandsService == null)
+            if (!entities.Any())
+            {
+                counter = 0;
+            }
+            else if (_bulkCommandsService == null)
             {
                 await _ctx.CurrencyRates.AddRangeAsync(entities, token)
                     .ConfigureAwait(false);
