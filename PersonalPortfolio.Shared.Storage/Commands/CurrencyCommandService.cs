@@ -17,6 +17,12 @@ namespace PersonalPortfolio.Shared.Storage.Commands
         private readonly ILogger<ICurrencyCommandService> _logger;
         private readonly IBulkCommandsService _bulkCommandsService;
 
+        // TODO: dataSource store
+        private static readonly IReadOnlyDictionary<string, int> Sources = new Dictionary<string, int>
+        {
+            {"European Central Bank", 1 }
+        };
+
         public CurrencyCommandService(
             PortfolioDbContext ctx,
             ILogger<ICurrencyCommandService> logger,
@@ -78,19 +84,26 @@ namespace PersonalPortfolio.Shared.Storage.Commands
 
             var entities = new List<CurrencyRate>();
 
-            foreach (var (rateDate, sourceCode, targetCode, value, dataSourceId) in rates)
+            foreach (var (rateDate, sourceCode, targetCode, value, dataSource) in rates)
             {
-                if (!currencyMap.ContainsKey(sourceCode) || !currencyMap.ContainsKey(targetCode))
+                if (!currencyMap.TryGetValue(sourceCode, out var sourceId)
+                    || !currencyMap.TryGetValue(targetCode, out var targetId))
                 {
                     _logger.LogWarning("Unknown currency pair: {0}-{1}", sourceCode, targetCode);
                     continue;
                 }
 
-                var sourceId = currencyMap[sourceCode];
-                var targetId = currencyMap[targetCode];
-
-                if (currencyTimestamps.TryGetValue((sourceId, targetId, 0), out var date) && date >= rateDate.Date)
+                if (currencyTimestamps.TryGetValue((sourceId, targetId, 0), out var date)
+                    && date >= rateDate.Date)
                 {
+                    // The data is below the last time stamp
+                    // Intend to use the full reset of the store
+                    continue;
+                }
+
+                if (!Sources.TryGetValue(dataSource, out var dataSourceId))
+                {
+                    _logger.LogWarning("Unknown data source: {0}", dataSource);
                     continue;
                 }
 
@@ -101,14 +114,14 @@ namespace PersonalPortfolio.Shared.Storage.Commands
                     CurrencyId = targetId,
                     RateTime = rateDate.Date,
                     Value = value,
-                    DataSourceId = 0 // TODO: dataSourceId
+                    DataSourceId = dataSourceId
                 });
             }
 
             return await InsertEntities(entities, token);
         }
 
-        private async Task<int> InsertEntities(List<CurrencyRate> entities, CancellationToken token)
+        private async Task<int> InsertEntities(IList<CurrencyRate> entities, CancellationToken token)
         {
             int counter;
 
