@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PersonalPortfolio.DataProviders.EuroFx
+namespace PersonalPortfolio.Shared.Core
 {
     public interface ICurrencyInfoService
     {
