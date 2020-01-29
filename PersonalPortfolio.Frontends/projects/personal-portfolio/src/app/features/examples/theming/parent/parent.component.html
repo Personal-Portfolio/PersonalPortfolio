@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 rtl class="main-heading">{{ 'personal-portfolio.examples.theming.parent.title' | translate }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-6" [ngClass]="routeAnimationsElements">
+      <p rtl>
+        {{ 'personal-portfolio.examples.theming.parent.text1' | translate }} <code>stylesUrls</code>
+        {{ 'personal-portfolio.examples.theming.parent.text2' | translate }} <code>@Component</code>
+        {{ 'personal-portfolio.examples.theming.parent.text3' | translate }} <code>styles.scss</code>
+        {{ 'personal-portfolio.examples.theming.parent.text4' | translate }}
+        <strong>{{ 'personal-portfolio.examples.theming.parent.text5' | translate }}</strong>
+        {{ 'personal-portfolio.examples.theming.parent.text6' | translate }}
+      </p>
+      <p rtl>
+        {{ 'personal-portfolio.examples.theming.parent.text7' | translate }}
+        <strong>{{ 'personal-portfolio.examples.theming.parent.text8' | translate }}</strong>
+        {{ 'personal-portfolio.examples.theming.parent.text9' | translate }}
+        <code>> (child selectors)</code>
+        {{ 'personal-portfolio.examples.theming.parent.text10' | translate }}
+      </p>
+      <pre>
+{{themeSrc}}
+      </pre>
+    </div>
+    <div rtl class="col-md-6" [ngClass]="routeAnimationsElements">
+      <div class="example">
+        <h1>{{ 'personal-portfolio.examples.theming.parent.description' | translate }}</h1>
+        <personal-portfolio-child></personal-portfolio-child>
+      </div>
+    </div>
+  </div>
+</div>
