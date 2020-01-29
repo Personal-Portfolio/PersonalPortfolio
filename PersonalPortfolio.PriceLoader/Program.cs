@@ -6,15 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PersonalPortfolio.DataProviders.EuroFx;
-using PersonalPortfolio.Shared.Core;
-using PersonalPortfolio.Shared.Storage.SqlServer;
-using PersonalPortfolio.Shared.Storage.SqlServer.Configuration;
+using PersonalPortfolio.DataProviders.Moex;
+using PersonalPortfolio.PricesLoader.Configuration;
 using Polly;
 using Polly.Extensions.Http;
 using Serilog;
 
-namespace PersonalPortfolio.RatesLoader
+namespace PersonalPortfolio.PricesLoader
 {
     internal class Program
     {
@@ -35,21 +33,16 @@ namespace PersonalPortfolio.RatesLoader
                     loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration);
                 })
                 .ConfigureServices((hostingContext, services) =>
-                    {
-                        services
-                            .AddPortfolioSqlStorageServices(hostingContext.Configuration)
-                            .Configure<BulkConfiguration>(hostingContext.Configuration.GetSection("StorageConfiguration:BulkConfiguration"))
-                            .AddHostedService<LoaderHostedService>();
+                {
+                    var moexClientConfigurationSection = hostingContext.Configuration.GetSection("MoexClientConfiguration");
+                    var moexClientConfiguration = moexClientConfigurationSection.Get<MoexClientConfiguration>();
 
-                        services
-                            .AddHttpClient<ICurrencyInfoService, CurrencyInfoService>(
-                                client =>
-                                {
-                                    client.BaseAddress = new Uri("https://www.ecb.europa.eu");
-                                })
-                            .AddPolicyHandler(RetryPolicy)
-                            .SetHandlerLifetime(TimeSpan.FromMinutes(5));
-                    });
+                    services
+                        .AddHostedService<LoaderHostedService>()
+                        .AddClient(moexClientConfiguration.IssAddress)
+                        .AddPolicyHandler(RetryPolicy)
+                        .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+                });
 
             await builder.RunConsoleAsync();
         }
