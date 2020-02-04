@@ -1,7 +1,6 @@
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import {
   routeAnimations,
   selectIsAuthenticated
@@ -24,10 +23,6 @@ export class ExamplesComponent implements OnInit {
     { link: 'stock-market', label: 'personal-portfolio.examples.menu.stocks' },
     { link: 'theming', label: 'personal-portfolio.examples.menu.theming' },
     { link: 'crud', label: 'personal-portfolio.examples.menu.crud' },
-    {
-      link: 'simple-state-management',
-      label: 'personal-portfolio.examples.menu.simple-state-management'
-    },
     { link: 'form', label: 'personal-portfolio.examples.menu.form' },
     { link: 'notifications', label: 'personal-portfolio.examples.menu.notifications' },
     { link: 'elements', label: 'personal-portfolio.examples.menu.elements' },

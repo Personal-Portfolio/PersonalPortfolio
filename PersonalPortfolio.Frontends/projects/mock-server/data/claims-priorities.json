@@ -1,0 +1,27 @@
+{
+    "currencies": {
+        "parameterName": null,
+        "pageSettings": {
+            "pageSize": 2147483647,
+            "pageNumber": 0
+        },
+        "count": 3,
+        "pageCount": 1,
+        "sortingSettings": null,
+        "id": 0,
+        "data": [
+            {
+                "priority": 200,
+                "name": "Critical"
+            },
+            {
+                "priority": 100,
+                "name": "High"
+            },
+            {
+                "priority": 10,
+                "name": "Normal"
+            }
+        ]
+    }
+}

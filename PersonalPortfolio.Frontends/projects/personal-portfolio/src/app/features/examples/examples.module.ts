@@ -26,8 +26,6 @@ import { FormEffects } from './form/form.effects';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
 import { NotificationsComponent } from './notifications/components/notifications.component';
 import { ExamplesEffects } from './examples.effects';
-import { UserComponent } from './simple-state-management/components/user.component';
-import { UserService } from './simple-state-management/user.service';
 import { ElementsComponent } from './elements/elements.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -71,10 +69,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CrudComponent,
     FormComponent,
     NotificationsComponent,
-    UserComponent,
     ElementsComponent
   ],
-  providers: [StockMarketService, UserService]
+  providers: [StockMarketService]
 })
 export class ExamplesModule {
   constructor() {}

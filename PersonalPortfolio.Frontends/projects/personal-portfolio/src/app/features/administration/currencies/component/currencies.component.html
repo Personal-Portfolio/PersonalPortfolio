@@ -1,0 +1,91 @@
+<div class="container" rtl>
+    <h1>{{ 'personal-portfolio.administration.currency.title' | translate }}</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <h2>{{ 'personal-portfolio.administration.currency.list-subtitle' | translate }}</h2>
+        <mat-card *ngFor="let currency of currencies$ | async" [ngClass]="routeAnimationsElements"
+          (click)=select(currency)>
+          <h3>{{currency.id}}</h3>
+        </mat-card>
+        <p *ngIf="(currencies$ | async)?.length === 0">{{'personal-portfolio.administration.currency.empty' | translate}}</p>
+        <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
+          *ngIf="!isEditing" (click)="addNew(currencyForm)">
+          <fa-icon icon="plus"></fa-icon>
+        </button>
+      </div>
+      <div class="col-md-6">
+        <span class="d-flex justify-content-between">
+          <h2>{{ 'personal-portfolio.administration.currency.edit-subtitle' | translate }}</h2>
+          <span class="d-flex justify-content-end">
+            <span *ngIf="selectedCurrency$ | async as selectedCurrency">
+              <button mat-icon-button color="accent" *ngIf="!isEditing">
+                <fa-icon icon="edit" (click)="edit(selectedCurrency)" [matTooltip]="'personal-portfolio.administration.currency.tooltip.edit' | translate"
+                  matTooltipPosition="above">
+                </fa-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="delete(selectedCurrency)">
+                <fa-icon icon="trash" [matTooltip]="'personal-portfolio.administration.currency.tooltip.delete' | translate"
+                  matTooltipPosition="above">
+                </fa-icon>
+              </button>
+              <button mat-icon-button (click)="deselect()">
+                <fa-icon icon="times" [matTooltip]="'personal-portfolio.administration.currency.tooltip.deselect' | translate"
+                  matTooltipPosition="above">
+                </fa-icon>
+              </button>
+            </span>
+          </span>
+        </span>
+  
+        <form #currencyForm="ngForm" [formGroup]="currencyFormGroup" [style.display]="isEditing ? 'block' : 'none'"
+          [ngClass]="routeAnimationsElements">
+          <div class="row">
+            <mat-form-field class="col">
+              <input matInput placeholder="{{ 'personal-portfolio.administration.currency.code-placeholder' | translate }}"
+                formControlName="id" required autofocus>
+              <mat-error *ngIf="currencyFormGroup.get('id').invalid">
+                {{ 'personal-portfolio.administration.currency.code-placeholder' | translate }}
+                {{ 'personal-portfolio.administration.currency.error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col">
+              <textarea matInput placeholder="{{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}"
+                formControlName="description" rows="5"></textarea>
+              <mat-error *ngIf="currencyFormGroup.get('description').invalid">
+                {{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}
+                {{ 'personal-portfolio.administration.currency.error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between">
+              <button (click)="save()" mat-raised-button color="primary">
+                {{'personal-portfolio.administration.currency.save' | translate }}
+              </button>
+              <button (click)="cancelEditing()" mat-raised-button>
+                {{'personal-portfolio.administration.currency.cancel' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+  
+        <ng-container *ngIf="!isEditing">
+          <div [ngClass]="routeAnimationsElements" *ngIf="selectedCurrency$ | async as selectedCurrency; else noselectedCurrencyTmpl">
+            <h3>{{ selectedCurrency.id }}</h3>
+            <mat-divider></mat-divider>
+            <p>{{ selectedCurrency.description }}</p>
+          </div>
+  
+          <ng-template #noselectedCurrencyTmpl>
+            <p [ngClass]="routeAnimationsElements">
+              {{'personal-portfolio.administration.currency.edit-text' | translate }}
+            </p>
+          </ng-template>
+        </ng-container>
+  
+      </div>
+    </div>
+  </div>
+  

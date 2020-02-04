@@ -49,3 +49,6 @@ Thumbs.db
 
 # debug
 debug.log
+
+# Mocks
+/projects/mock-server/data.json

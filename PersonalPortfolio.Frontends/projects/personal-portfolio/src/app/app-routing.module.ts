@@ -4,8 +4,13 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'about',
+    redirectTo: 'admin',
     pathMatch: 'full'
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/administration/administration.module').then(m => m.AdministrationModule)
   },
   {
     path: 'about',
@@ -39,7 +44,7 @@ const routes: Routes = [
   // useHash supports github.io demo page, remove in your app
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: true,
+      useHash: false,
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: PreloadAllModules
     })

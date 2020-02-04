@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Personal Portfolio Configuration API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/currencies": {
+            "get": {
+                "description": "Get list of all registered currencies",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/currencies/{id}": {
+            "get": {
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Code of the currency",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true,
+                        "examples": {
+                            "USD": {
+                                "value": "USD"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }}
+}

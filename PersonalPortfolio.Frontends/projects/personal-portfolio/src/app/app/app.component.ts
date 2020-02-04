@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
     { link: 'about', label: 'personal-portfolio.menu.about' }
   ];
   navigationSideMenu = [
+    { link: 'admin', label: 'personal-portfolio.menu.administration' },
     { link: 'settings', label: 'personal-portfolio.menu.settings' },
     { link: 'about', label: 'personal-portfolio.menu.about' }
   ];
