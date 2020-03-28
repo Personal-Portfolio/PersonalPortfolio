@@ -11,7 +11,10 @@ import { FEATURE_NAME, reducers } from './administration.state';
 import { AdministrationComponent } from './administration/administration.component';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { CurrenciesComponent } from './currencies/component/currencies.component';
+import { SecuritiesComponent } from './securities/component/securities.component';
 import { AdministrationEffects } from './administration.effects';
+import { CurrenciesEffects } from './currencies/currencies.effects';
+import { CurrenciesService } from './services/currencies.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(
@@ -35,13 +38,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         isolate: true
       }),
       EffectsModule.forFeature([
-        AdministrationEffects
+        AdministrationEffects,
+        CurrenciesEffects
       ])
     ],
     declarations: [
         AdministrationComponent,
-        CurrenciesComponent
-    ]
+        CurrenciesComponent,
+        SecuritiesComponent
+    ],
+    providers: [CurrenciesService]
 })
 export class AdministrationModule {
     constructor() {}

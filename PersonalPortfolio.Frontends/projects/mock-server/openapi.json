@@ -1,45 +1,128 @@
 {
-    "openapi": "3.0.2",
+    "openapi": "3.0.0",
     "info": {
         "title": "Personal Portfolio Configuration API",
         "version": "1.0"
     },
     "paths": {
         "/api/currencies": {
+            "summary": "Path used to manage the list of currencies.",
+            "description": "The REST endpoint/path used to list `Currency` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
             "get": {
-                "description": "Get list of all registered currencies",
-                "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Currency"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `Currency` entities."
                     }
-                }
+                },
+                "operationId": "getcurrencies",
+                "summary": "List All currencies",
+                "description": "Gets a list of all `Currency` entities."
             }
         },
         "/api/currencies/{id}": {
+            "summary": "Path used to manage a single Currency.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Currency`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
             "get": {
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "description": "Code of the currency",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "path",
-                        "required": true,
-                        "examples": {
-                            "USD": {
-                                "value": "USD"
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Currency"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Currency`."
                     }
+                },
+                "operationId": "getCurrency",
+                "summary": "Get a Currency",
+                "description": "Gets the details of a single instance of a `Currency`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Currency` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Currency"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updateCurrency",
+                "summary": "Update a Currency",
+                "description": "Updates an existing `Currency`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteCurrency",
+                "summary": "Delete a Currency",
+                "description": "Deletes an existing `Currency`."
+            },
+            "parameters": [
+                {
+                    "examples": {
+                        "usd": {
+                            "value": "usd"
+                        }
+                    },
+                    "name": "id",
+                    "description": "A unique identifier for a `Currency`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
                 }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "Currency": {
+                "title": "Root Type for Currency",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "example": [{
+                    "code": "USD",
+                    "description": "United States dollar"
+                }, {
+                    "code": "EUR",
+                    "description": "EURO"
+                }, {
+                    "code": "RUB",
+                    "description": "Russian rubble"
+                }]
             }
-        }}
+        }
+    }
 }

@@ -14,6 +14,6 @@ export class AdministrationComponent {
     tabs = [
         { link: 'currencies', label: 'personal-portfolio.administration.menu.currencies' },
         { link: 'securities', label: 'personal-portfolio.administration.menu.securities' },
-        { link: 'data-providers', label: 'personal-portfolio.administration.menu.data-providers' }
+        { link: '', label: 'personal-portfolio.administration.menu.data-providers' }
       ];
 }

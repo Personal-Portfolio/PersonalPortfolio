@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdministrationComponent } from './administration/administration.component';
 import { CurrenciesComponent } from './currencies/component/currencies.component';
+import { SecuritiesComponent } from './securities/component/securities.component';
 
 const routes: Routes = [
     {
@@ -23,6 +24,16 @@ const routes: Routes = [
                 path: 'currencies/:id',
                 component: CurrenciesComponent,
                 data: { title: 'personal-portfolio.administration.menu.currencies' }
+            },
+            {
+                path: 'securities',
+                redirectTo: 'securities/',
+                pathMatch: 'full'
+            },
+            {
+                path: 'securities/:id',
+                component: SecuritiesComponent,
+                data: { title: 'personal-portfolio.administration.menu.securities' }
             }
         ]
     }
