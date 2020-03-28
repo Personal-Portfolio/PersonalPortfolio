@@ -23,7 +23,7 @@
             "main": "projects/personal-portfolio/src/main.ts",
             "polyfills": "projects/personal-portfolio/src/polyfills.ts",
             "tsConfig": "projects/personal-portfolio/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/personal-portfolio/src/favicon.ico",
               "projects/personal-portfolio/src/assets"
@@ -47,7 +47,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -72,6 +71,10 @@
                   "baseline": "1536kb",
                   "maximumWarning": "100kb",
                   "maximumError": "200kb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
