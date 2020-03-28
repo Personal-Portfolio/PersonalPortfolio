@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LazyElementsModule } from '@angular-extensions/elements';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -39,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    LazyElementsModule,
     SharedModule,
     ExamplesRoutingModule,
     StoreModule.forFeature(FEATURE_NAME, reducers),
