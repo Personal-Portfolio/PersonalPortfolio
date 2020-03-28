@@ -15,7 +15,8 @@
     "e2e": "ng e2e",
     "format:write": "prettier projects/**/*.{ts,json,md,scss} --write",
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
-    "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/personal-portfolio/stats-es2015.json"
+    "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/personal-portfolio/stats-es2015.json",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
