@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
-  logo = require('../../assets/logo.png');
+  logo:string = (require('../../assets/logo.png')).default;
   languages = ['en', 'de'];
   navigation = [
     { link: 'about', label: 'personal-portfolio.menu.about' }
