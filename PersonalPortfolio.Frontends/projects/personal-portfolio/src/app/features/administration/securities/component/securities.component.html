@@ -55,6 +55,28 @@
                 </div>
                 <div class="row">
                     <mat-form-field class="col">
+                        <input matInput
+                            placeholder="{{ 'personal-portfolio.administration.security.type-placeholder' | translate }}"
+                            formControlName="type" rows="5"/>
+                        <mat-error *ngIf="securityFormGroup.get('type').invalid">
+                            {{ 'personal-portfolio.administration.security.type-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col">
+                        <input matInput
+                            placeholder="{{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}"
+                            formControlName="currency" rows="5"/>
+                        <mat-error *ngIf="securityFormGroup.get('type').invalid">
+                            {{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col">
                         <textarea matInput
                             placeholder="{{ 'personal-portfolio.administration.security.description-placeholder' | translate }}"
                             formControlName="description" rows="5"></textarea>
