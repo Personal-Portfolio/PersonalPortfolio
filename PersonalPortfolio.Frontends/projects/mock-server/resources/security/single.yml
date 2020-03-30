@@ -1,0 +1,47 @@
+---
+summary: Path used to manage a single security.
+description: The REST endpoint/path used to get, update, and delete single instances
+  of an `Security`. This path contains `GET`, `PUT`, and `DELETE` operations
+  used to perform the get, update, and delete tasks, respectively.
+get:
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            "$ref": '../../types/security.yml'
+      description: Successful response - returns a single `Security`.
+  operationId: getSecurity
+  summary: Get a Security
+  description: Gets the details of a single instance of a `Security`.
+put:
+  requestBody:
+    description: Updated `Security` information.
+    content:
+      application/json:
+        schema:
+          "$ref": '../../types/security.yml'
+    required: true
+  responses:
+    '202':
+      description: Successful response.
+  operationId: updateSecurity
+  summary: Update a Security
+  description: Updates an existing `Security`.
+delete:
+  responses:
+    '204':
+      description: Successful response.
+  operationId: deleteSecurity
+  summary: Delete a Security
+  description: Deletes an existing `Security`.
+parameters:
+- examples:
+    usd:
+      value: fxmm
+  name: code
+  description: A unique identifier for a `Security`.
+  schema:
+    type: string
+  in: path
+  required: true

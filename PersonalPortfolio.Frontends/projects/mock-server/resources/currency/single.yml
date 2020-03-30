@@ -38,7 +38,7 @@ parameters:
 - examples:
     usd:
       value: usd
-  name: id
+  name: code
   description: A unique identifier for a `Currency`.
   schema:
     type: string

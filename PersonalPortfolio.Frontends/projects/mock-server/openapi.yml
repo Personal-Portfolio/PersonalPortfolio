@@ -8,7 +8,13 @@ paths:
     "$ref": './resources/currency/list.yml'
   "/api/currencies/{id}":
     "$ref": './resources/currency/single.yml'
+  "/api/securities":
+    "$ref": './resources/security/list.yml'
+  "/api/securities/{id}":
+    "$ref": './resources/security/single.yml'
 components:
   schemas:
     Currency:
       "$ref": './types/currency.yml'
+    Security:
+      "$ref": './types/security.yml'

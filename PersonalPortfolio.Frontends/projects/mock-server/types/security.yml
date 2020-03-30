@@ -1,0 +1,18 @@
+---
+title: Type for Security
+description: ''
+type: object
+properties:
+  description:
+    type: string
+  code:
+    type: string
+  type:
+    type: string
+  currency:
+    type: string
+example:
+  code: FXRU
+  description: FinEX Russian corporate bonds ETF
+  Type: ETF
+  currency: RUR
