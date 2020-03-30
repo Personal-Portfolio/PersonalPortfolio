@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators'
 export class CurrenciesService {
     constructor(private http: HttpClient) { }
 
-
     getAll(): Observable<Currency[]> {
         return this.http.get("http://localhost:4010/api/currencies").pipe(
             map((items: {code: string, description: string}[]) => items.map(i => {

@@ -1,10 +1,11 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
 import { AppState } from '../../core/core.module';
-import { CurrencyState } from './currencies/currency';
+import { Currency } from './currencies/currency';
+import { Security } from './securities/security';
 import { currenciesReducer } from './currencies/currencies.reducer';
 import { securitiesReducer } from './securities/securities.reducer';
-import { SecurityState } from './securities/security';
+import { EntityState } from '@ngrx/entity';
 
 export const FEATURE_NAME = 'administration';
 export const selectAdministration = createFeatureSelector<State, AdministrationState>(
@@ -17,8 +18,8 @@ export const reducers: ActionReducerMap<AdministrationState> = {
 };
 
 export interface AdministrationState {
-  currencies: CurrencyState;
-  securities: SecurityState;
+  currencies: EntityState<Currency>;
+  securities: EntityState<Security>;
 //   dataProviders: DataProvidersState;
 }
 

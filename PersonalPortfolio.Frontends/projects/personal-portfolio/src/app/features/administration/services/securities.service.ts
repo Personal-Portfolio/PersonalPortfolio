@@ -1,38 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Currency } from '../currencies/currency';
+import { Security } from '../securities/security';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators'
 
 @Injectable()
-export class CurrenciesService {
-    private static Repo: Currency[] = [
-        {
-            id: 'USD', description: 'United States dollar'
-        },
-        {
-            id: 'EUR', description: 'EURO'
-        },
-        {
-            id: 'RUB', description: 'Russian Rubble'
-        }];
-
+export class SecuritiesService {
     constructor(private http: HttpClient) { }
 
-    getAll(): Observable<Currency[]> {
-        const result = this.buildArray();
-        return of(result);
+    getAll(): Observable<Security[]> {
+        return this.http.get("http://localhost:4010/api/securities").pipe(
+            map((items: {code: string, description: string, type: string, currency: string}[]) => items.map(i => {
+                return { id: i.code, description: i.description, type: i.type, currency: i.currency}
+            }))
+        );
     }
 
-    getByCode(symbol: string): Observable<Currency> {
-        const result = this.buildResult(symbol);
-        return of(result);
-    }
-
-    private buildResult(symbol: string): Currency {
-        return CurrenciesService.Repo.find(c => c.id === symbol);
-    }
-
-    private buildArray(): Currency[] {
-        return CurrenciesService.Repo; 
+    getByCode(symbol: string): Observable<Security> {
+        return this.http.get(`http://localhost:4010/api/securities/${symbol}`).pipe(
+            map((item: {code: string, description: string, type: string, currency: string}) => {
+                return { id: item.code, description: item.description, type: item.type, currency: item.currency }
+            })
+        );
     }
 }

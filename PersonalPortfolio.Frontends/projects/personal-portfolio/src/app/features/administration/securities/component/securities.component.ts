@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Router } from '@angular/router';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
@@ -9,8 +8,8 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
 import { State } from '../../administration.state';
 import { Security } from '../security';
+import { actionSecuritiesLoad, actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../securities.actions';
 import { selectAllSecurities, selectSelectedSecurities } from '../../securities/securities.selectors';
-import { actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../securities.actions';
 @Component({
     selector: 'personal-portfolio-securities',
     templateUrl: './securities.component.html',
@@ -18,7 +17,6 @@ import { actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../securit
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SecuritiesComponent {
-
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
     securityFormGroup = this.fb.group(SecuritiesComponent.createSecurity());
@@ -28,14 +26,17 @@ export class SecuritiesComponent {
     isEditing: boolean;
 
     static createSecurity(): Security {
-        return { id: uuid(), code: '', description: '' };
+        return { id: '', description: '', type: 'Equity', currency: 'USD' };
     }
 
     constructor(
         public store: Store<State>,
         public fb: FormBuilder,
         private router: Router
-    ) { }
+    ) {
+        this.store.dispatch(actionSecuritiesLoad());
+        this.isEditing = false;
+     }
 
     select(security: Security) {
         this.isEditing = false;

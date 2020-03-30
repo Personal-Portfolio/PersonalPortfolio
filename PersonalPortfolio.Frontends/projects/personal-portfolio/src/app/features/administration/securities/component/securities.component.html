@@ -5,7 +5,7 @@
             <h2>{{ 'personal-portfolio.administration.security.list-subtitle' | translate }}</h2>
             <mat-card *ngFor="let security of securities$ | async" [ngClass]="routeAnimationsElements"
                 (click)=select(security)>
-                <h3>{{security.code}}</h3>
+                <h3>{{security.id}}</h3>
             </mat-card>
             <p *ngIf="(securities$ | async)?.length === 0">
                 {{'personal-portfolio.administration.security.empty' | translate}}</p>
@@ -46,8 +46,8 @@
                     <mat-form-field class="col">
                         <input matInput
                             placeholder="{{ 'personal-portfolio.administration.security.code-placeholder' | translate }}"
-                            formControlName="code" required autofocus>
-                        <mat-error *ngIf="securityFormGroup.get('code').invalid">
+                            formControlName="id" required autofocus>
+                        <mat-error *ngIf="securityFormGroup.get('id').invalid">
                             {{ 'personal-portfolio.administration.security.code-placeholder' | translate }}
                             {{ 'personal-portfolio.administration.security.error' | translate }}
                         </mat-error>

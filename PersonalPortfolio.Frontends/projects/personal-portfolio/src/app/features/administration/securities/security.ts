@@ -1,9 +1,6 @@
-import { EntityState } from '@ngrx/entity';
-
 export interface Security {
   id: string;
-  code: string;
   description: string;
+  type: string;
+  currency: string;
 }
-
-export interface SecurityState extends EntityState<Security> {}

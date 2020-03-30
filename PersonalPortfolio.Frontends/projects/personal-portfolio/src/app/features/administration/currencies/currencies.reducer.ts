@@ -1,6 +1,6 @@
-import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Currency, CurrencyState } from './currency';
+import { Currency } from './currency';
 import { actionCurrenciesUpsertOne, actionCurrenciesUpsertMany, actionCurrenciesDeleteOne } from './currencies.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 
@@ -12,7 +12,7 @@ export const currenciesAdapter: EntityAdapter<Currency> = createEntityAdapter<Cu
     sortComparer: sort
 });
 
-export const initialState: CurrencyState = currenciesAdapter.getInitialState({
+export const initialState: EntityState<Currency> = currenciesAdapter.getInitialState({
     ids: [],
     entities: {}
 });
@@ -28,6 +28,6 @@ const reducer = createReducer(
     on(actionCurrenciesDeleteOne, (state, { id }) => currenciesAdapter.removeOne(id, state))
 );
 
-export function currenciesReducer(state: CurrencyState | undefined, action: Action) {
+export function currenciesReducer(state: EntityState<Currency> | undefined, action: Action) {
     return reducer(state, action);
 }

@@ -15,6 +15,8 @@ import { SecuritiesComponent } from './securities/component/securities.component
 import { AdministrationEffects } from './administration.effects';
 import { CurrenciesEffects } from './currencies/currencies.effects';
 import { CurrenciesService } from './services/currencies.service';
+import { SecuritiesService } from './services/securities.service';
+import { SecuritiesEffects } from './securities/securities.effects';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(
@@ -39,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       }),
       EffectsModule.forFeature([
         AdministrationEffects,
-        CurrenciesEffects
+        CurrenciesEffects,
+        SecuritiesEffects
       ])
     ],
     declarations: [
@@ -47,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         CurrenciesComponent,
         SecuritiesComponent
     ],
-    providers: [CurrenciesService]
+    providers: [CurrenciesService, SecuritiesService]
 })
 export class AdministrationModule {
     constructor() {}
