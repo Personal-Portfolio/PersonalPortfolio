@@ -20,6 +20,8 @@
   "personal-portfolio.administration.security.error": "is required",
   "personal-portfolio.administration.security.new": "New",
   "personal-portfolio.administration.security.code-placeholder": "Code",
+  "personal-portfolio.administration.security.type-placeholder": "Type",
+  "personal-portfolio.administration.security.currency-placeholder": "Currency",
   "personal-portfolio.administration.security.description-placeholder": "Description",
   "personal-portfolio.administration.security.save": "Save",
   "personal-portfolio.administration.security.list-subtitle": "Registered securities",
