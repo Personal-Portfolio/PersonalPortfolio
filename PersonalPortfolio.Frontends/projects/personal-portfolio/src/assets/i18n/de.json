@@ -1,12 +1,5 @@
 {
-  "personal-portfolio.about.change-theme": "Thema ändern",
   "personal-portfolio.about.check-blogs": "oder lese weitere Blogs darüber",
-  "personal-portfolio.about.contributors.description1": "Möchtest du auch zu einem Open Source Projekt mit Angular beitragen?",
-  "personal-portfolio.about.contributors.title": "Beitragende",
-  "personal-portfolio.about.get-notified.description": "ein Twitterbot, der dich über die neusten Versionen deiner Lieblingsframeworks & -bibliotheken informiert!",
-  "personal-portfolio.about.get-notified.follow": "Folge",
-  "personal-portfolio.about.get-notified.title": "Werde über neue Versionen informiert",
-  "personal-portfolio.about.get-started": "Leg los!",
   "personal-portfolio.features.angular": "Modernes und leistungsfähiges Framework",
   "personal-portfolio.features.angular-cli": "Eine Befehlszeilenschnittstelle für Angular",
   "personal-portfolio.features.angular-material": "Material Design-Komponente",

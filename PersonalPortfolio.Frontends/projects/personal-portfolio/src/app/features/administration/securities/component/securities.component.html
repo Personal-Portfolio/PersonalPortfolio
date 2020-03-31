@@ -106,12 +106,17 @@
                         </mat-card-title>
                         <mat-card-subtitle>
                             <mat-chip-list aria-label="Security classification">
-                                <mat-chip color="personal-portfolio-primary">{{ selectedSecurity.type }}</mat-chip>
-                                <mat-chip color="personal-portfolio-accent">{{ selectedSecurity.currency }}</mat-chip>
+                                <mat-chip color="primary">
+                                    {{ selectedSecurity.type }}
+                                </mat-chip>
+                                <mat-chip color="accent">
+                                    {{ selectedSecurity.currency }}
+                                </mat-chip>
                               </mat-chip-list>
                         </mat-card-subtitle>
                         <mat-card-content>
-                            {{ selectedSecurity.description }}</mat-card-content>
+                            {{ selectedSecurity.description }}
+                        </mat-card-content>
                     </mat-card>
                 </div>
                 <ng-template #noselectedSecurityTmpl>

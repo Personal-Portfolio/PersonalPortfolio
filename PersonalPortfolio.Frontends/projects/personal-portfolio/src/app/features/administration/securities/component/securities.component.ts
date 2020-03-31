@@ -18,7 +18,6 @@ import { selectAllSecurities, selectSelectedSecurities } from '../../securities/
 })
 export class SecuritiesComponent {
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-
     securityFormGroup = this.fb.group(SecuritiesComponent.createSecurity());
     securities$: Observable<Security[]> = this.store.pipe(select(selectAllSecurities));
     selectedSecurity$: Observable<Security> = this.store.pipe(select(selectSelectedSecurities));
