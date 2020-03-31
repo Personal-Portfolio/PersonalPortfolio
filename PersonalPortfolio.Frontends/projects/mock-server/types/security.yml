@@ -14,5 +14,5 @@ properties:
 example:
   code: FXRU
   description: FinEX Russian corporate bonds ETF
-  Type: ETF
+  type: Funds
   currency: RUR

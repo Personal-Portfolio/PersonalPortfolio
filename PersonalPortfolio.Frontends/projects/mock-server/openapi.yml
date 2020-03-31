@@ -12,6 +12,8 @@ paths:
     "$ref": './resources/security/list.yml'
   "/api/securities/{id}":
     "$ref": './resources/security/single.yml'
+  "/api/security-types":
+    "$ref": './resources/security-type/list.yml'
 components:
   schemas:
     Currency:
