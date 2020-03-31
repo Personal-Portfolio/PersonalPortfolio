@@ -24,16 +24,8 @@
 @import './app/features/examples/theming/child/child.component.theme';
 @import './app/features/examples/examples/examples.component.theme';
 
-@import './app/features/administration/securities/component/securities.component.theme.scss';
-
 @mixin custom-components-theme($theme) {
-    // Common
-    @include personal-portfolio-styles-reset-theme($theme);
-    @include personal-portfolio-app-component-theme($theme);
-    @include personal-portfolio-about-component-theme($theme);
-
     // Administration
-    @include personal-portfolio-securities-component-theme($theme);
 
     // Examples
     @include personal-portfolio-big-input-component-theme($theme);
@@ -43,6 +35,11 @@
     @include personal-portfolio-parent-component-theme($theme);
     @include personal-portfolio-child-component-theme($theme);
     @include personal-portfolio-examples-component-theme($theme);
+
+    // Common
+    @include personal-portfolio-styles-reset-theme($theme);
+    @include personal-portfolio-app-component-theme($theme);
+    @include personal-portfolio-about-component-theme($theme);
 }
 
 .default-theme {
