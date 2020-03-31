@@ -13,28 +13,36 @@
 @import './themes/black-theme';
 @import './themes/nature-theme';
 
-@import 'styles-reset.scss-theme';
-@import './app/app/app.component.scss-theme';
-@import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/about/about/about.component.scss-theme';
-@import './app/features/examples/notifications/components/notifications.component.scss-theme';
-@import './app/features/examples/todos/components/todos-container.component.scss-theme';
-@import './app/features/examples/stock-market/components/stock-market-container.component.scss-theme';
-@import './app/features/examples/theming/parent/parent.component.scss-theme';
-@import './app/features/examples/theming/child/child.component.scss-theme';
-@import './app/features/examples/examples/examples.component.scss-theme';
+@import 'styles-reset.theme';
+@import './app/app/app.component.theme';
+@import './app/shared/big-input/big-input/big-input.component.theme';
+@import './app/features/about/about/about.component.theme';
+@import './app/features/examples/notifications/components/notifications.component.theme';
+@import './app/features/examples/todos/components/todos-container.component.theme';
+@import './app/features/examples/stock-market/components/stock-market-container.component.theme';
+@import './app/features/examples/theming/parent/parent.component.theme';
+@import './app/features/examples/theming/child/child.component.theme';
+@import './app/features/examples/examples/examples.component.theme';
+
+@import './app/features/administration/securities/component/securities.component.theme.scss';
 
 @mixin custom-components-theme($theme) {
-  @include personal-portfolio-styles-reset-theme($theme);
-  @include personal-portfolio-app-component-theme($theme);
-  @include personal-portfolio-about-component-theme($theme);
-  @include personal-portfolio-big-input-component-theme($theme);
-  @include personal-portfolio-notifications-component-theme($theme);
-  @include personal-portfolio-todos-container-component-theme($theme);
-  @include personal-portfolio-stock-market-container-component-theme($theme);
-  @include personal-portfolio-parent-component-theme($theme);
-  @include personal-portfolio-child-component-theme($theme);
-  @include personal-portfolio-examples-component-theme($theme);
+    // Common
+    @include personal-portfolio-styles-reset-theme($theme);
+    @include personal-portfolio-app-component-theme($theme);
+    @include personal-portfolio-about-component-theme($theme);
+
+    // Administration
+    @include personal-portfolio-securities-component-theme($theme);
+
+    // Examples
+    @include personal-portfolio-big-input-component-theme($theme);
+    @include personal-portfolio-notifications-component-theme($theme);
+    @include personal-portfolio-todos-container-component-theme($theme);
+    @include personal-portfolio-stock-market-container-component-theme($theme);
+    @include personal-portfolio-parent-component-theme($theme);
+    @include personal-portfolio-child-component-theme($theme);
+    @include personal-portfolio-examples-component-theme($theme);
 }
 
 .default-theme {

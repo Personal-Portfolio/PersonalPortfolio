@@ -100,9 +100,19 @@
             <ng-container *ngIf="!isEditing">
                 <div [ngClass]="routeAnimationsElements"
                     *ngIf="selectedSecurity$ | async as selectedSecurity; else noselectedSecurityTmpl">
-                    <h3>{{ selectedSecurity.code }}</h3>
-                    <mat-divider></mat-divider>
-                    <p>{{ selectedSecurity.description }}</p>
+                    <mat-card>
+                        <mat-card-title>
+                            {{ selectedSecurity.id }}
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <mat-chip-list aria-label="Security classification">
+                                <mat-chip color="personal-portfolio-primary">{{ selectedSecurity.type }}</mat-chip>
+                                <mat-chip color="personal-portfolio-accent">{{ selectedSecurity.currency }}</mat-chip>
+                              </mat-chip-list>
+                        </mat-card-subtitle>
+                        <mat-card-content>
+                            {{ selectedSecurity.description }}</mat-card-content>
+                    </mat-card>
                 </div>
                 <ng-template #noselectedSecurityTmpl>
                     <p [ngClass]="routeAnimationsElements">
