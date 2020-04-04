@@ -8,12 +8,22 @@
                 <h3>{{security.id}}</h3>
             </mat-card>
             <p *ngIf="(securities$ | async)?.length === 0">
-                {{'personal-portfolio.administration.security.empty' | translate}}</p>
+                {{'personal-portfolio.administration.security.empty' | translate}}
+            </p>
             <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
                 *ngIf="!isEditing" (click)="addNew(securityForm)">
                 <fa-icon icon="plus"></fa-icon>
             </button>
         </div>
+        <!-- <div class="col-md-6">
+            <h2>{{ 'personal-portfolio.administration.security.list-subtitle' | translate }}</h2>
+            <mat-card *ngFor="let securityType of securityTypes$ | async" [ngClass]="routeAnimationsElements">
+                <h3>{{securityType.id}}</h3>
+            </mat-card>
+            <p *ngIf="(securityTypes$ | async)?.length === 0">
+                No types
+            </p>
+        </div> -->
         <div class="col-md-6">
             <span class="d-flex justify-content-between">
                 <h2>{{ 'personal-portfolio.administration.security.edit-subtitle' | translate }}</h2>
@@ -46,7 +56,7 @@
                     <mat-form-field class="col">
                         <input matInput
                             placeholder="{{ 'personal-portfolio.administration.security.code-placeholder' | translate }}"
-                            formControlName="id" required autofocus>
+                            formControlName="id" required autofocus />
                         <mat-error *ngIf="securityFormGroup.get('id').invalid">
                             {{ 'personal-portfolio.administration.security.code-placeholder' | translate }}
                             {{ 'personal-portfolio.administration.security.error' | translate }}
@@ -55,9 +65,13 @@
                 </div>
                 <div class="row">
                     <mat-form-field class="col">
-                        <input matInput
+                        <mat-select formControlName="type"
                             placeholder="{{ 'personal-portfolio.administration.security.type-placeholder' | translate }}"
-                            formControlName="type" rows="5"/>
+                            required>
+                            <mat-option *ngFor="let type of securityTypes$ | async" [value]="type.id">
+                                {{type.id}}
+                            </mat-option>
+                        </mat-select>
                         <mat-error *ngIf="securityFormGroup.get('type').invalid">
                             {{ 'personal-portfolio.administration.security.type-placeholder' | translate }}
                             {{ 'personal-portfolio.administration.security.error' | translate }}
@@ -68,7 +82,7 @@
                     <mat-form-field class="col">
                         <input matInput
                             placeholder="{{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}"
-                            formControlName="currency" rows="5"/>
+                            formControlName="currency" rows="5" required />
                         <mat-error *ngIf="securityFormGroup.get('type').invalid">
                             {{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}
                             {{ 'personal-portfolio.administration.security.error' | translate }}
@@ -112,7 +126,7 @@
                                 <mat-chip color="accent" selected>
                                     {{ selectedSecurity.currency }}
                                 </mat-chip>
-                              </mat-chip-list>
+                            </mat-chip-list>
                         </mat-card-subtitle>
                         <mat-card-content>
                             {{ selectedSecurity.description }}

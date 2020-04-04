@@ -109,6 +109,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
         MatToolbarModule,
         MatIconModule,
         MatTooltipModule,
+        MatSelectModule,
         MatSnackBarModule,
         MatSlideToggleModule,
         MatDividerModule,

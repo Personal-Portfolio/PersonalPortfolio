@@ -1,15 +1,16 @@
 import { Router } from '@angular/router';
 import { FormBuilder, NgForm } from '@angular/forms';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
-import { State } from '../../administration.state';
-import { Currency } from '../currency';
-import { actionCurrenciesLoad, actionCurrenciesDeleteOne, actionCurrenciesUpsertOne } from '../currencies.actions';
-import { selectAllCurrencies, selectSelectedCurrencies } from '../currencies.selectors';
+import { State } from '../../state/administration.state';
+import { Currency } from '../../state/currencies/currency';
+import { actionCurrenciesRequestAll, actionCurrenciesDeleteOne, actionCurrenciesUpsertOne } from '../../state/currencies/currencies.actions';
+import { selectAllCurrencies, selectSelectedCurrencies } from '../../state/currencies/currencies.selectors';
+
 
 @Component({
     selector: 'personal-portfolio-currencies',
@@ -17,7 +18,7 @@ import { selectAllCurrencies, selectSelectedCurrencies } from '../currencies.sel
     styleUrls: ['./currencies.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CurrenciesComponent {
+export class CurrenciesComponent implements OnInit{
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
     currencyFormGroup = this.fb.group(CurrenciesComponent.createCurrency());
@@ -35,9 +36,11 @@ export class CurrenciesComponent {
         public fb: FormBuilder,
         private router: Router
     ) {
-        this.store.dispatch(actionCurrenciesLoad());
         this.isEditing = false;
-     }
+    }
+    ngOnInit(): void {
+        this.store.dispatch(actionCurrenciesRequestAll());
+    }
 
     select(currency: Currency) {
         this.isEditing = false;

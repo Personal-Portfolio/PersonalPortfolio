@@ -13,6 +13,14 @@ export const actionSecuritiesDeleteOne = createAction(
     '[Securities] Delete One', props<{ id: string }>()
 );
 
-export const actionSecuritiesLoad = createAction(
+export const actionSecuritiesRequestAll= createAction(
     '[Securities] Load All'
+);
+
+export const actionSecuritiesFailRequest = createAction(
+    '[Securities] Do on load failed', props<{ error: Error }>()
+);
+
+export const actionSecuritiesRequestCancelRequest = createAction(
+    '[Securities] Cancel load'
 );

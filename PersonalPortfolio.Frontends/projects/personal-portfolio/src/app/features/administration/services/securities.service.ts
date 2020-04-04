@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Security } from '../securities/security';
+import { Security } from '../state/securities/security';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 

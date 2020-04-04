@@ -7,16 +7,18 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SharedModule } from '../../shared/shared.module';
 import { environment } from '../../../environments/environment';
-import { FEATURE_NAME, reducers } from './administration.state';
-import { AdministrationComponent } from './administration/administration.component';
+import { AdministrationComponent } from './components/administration/administration.component';
 import { AdministrationRoutingModule } from './administration-routing.module';
-import { CurrenciesComponent } from './currencies/component/currencies.component';
-import { SecuritiesComponent } from './securities/component/securities.component';
-import { AdministrationEffects } from './administration.effects';
-import { CurrenciesEffects } from './currencies/currencies.effects';
+import { CurrenciesComponent } from './components/currencies/currencies.component';
+import { SecuritiesComponent } from './components/securities/securities.component';
+import { FEATURE_NAME, reducers } from './state/administration.state';
+import { AdministrationEffects } from './state/administration.effects';
+import { CurrenciesEffects } from './state/currencies/currencies.effects';
 import { CurrenciesService } from './services/currencies.service';
 import { SecuritiesService } from './services/securities.service';
-import { SecuritiesEffects } from './securities/securities.effects';
+import { SecuritiesEffects } from './state/securities/securities.effects';
+import { SecurityTypesEffects } from './state/security-types/security-types.effects';
+import { SecurityTypesService } from './services/securities-types.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(
@@ -42,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       EffectsModule.forFeature([
         AdministrationEffects,
         CurrenciesEffects,
+        SecurityTypesEffects,
         SecuritiesEffects
       ])
     ],
@@ -50,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         CurrenciesComponent,
         SecuritiesComponent
     ],
-    providers: [CurrenciesService, SecuritiesService]
+    providers: [CurrenciesService, SecuritiesService, SecurityTypesService]
 })
 export class AdministrationModule {
     constructor() {}

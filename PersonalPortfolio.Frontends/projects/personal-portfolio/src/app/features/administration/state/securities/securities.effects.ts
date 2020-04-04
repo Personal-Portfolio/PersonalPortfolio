@@ -4,26 +4,24 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 
 import { State } from '../administration.state';
-import { actionCurrenciesLoad, actionCurrenciesUpsertMany } from './currencies.actions';
-import { CurrenciesService } from '../services/currencies.service';
-
-export const BOOKS_KEY = 'EXAMPLES.BOOKS';
+import { actionSecuritiesRequestAll, actionSecuritiesUpsertMany } from './securities.actions';
+import { SecuritiesService } from '../../services/securities.service';
 
 @Injectable()
-export class CurrenciesEffects {
+export class SecuritiesEffects {
   constructor(
     private actions$: Actions,
     private store: Store<State>,
-    private currenciesService: CurrenciesService
+    private securitiesService: SecuritiesService
   ) {}
 
   loadCurrencies = createEffect(
     () => this.actions$
             .pipe(
-                ofType(actionCurrenciesLoad),
-                switchMap(actions => this.currenciesService.getAll()
+                ofType(actionSecuritiesRequestAll),
+                switchMap(actions => this.securitiesService.getAll()
                     .pipe(
-                        map(items => actionCurrenciesUpsertMany( { currencies: items }))
+                        map(items => actionSecuritiesUpsertMany( { securities: items }))
                     )
                 )
             ),

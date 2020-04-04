@@ -13,6 +13,14 @@ export const actionCurrenciesDeleteOne = createAction(
     '[Currencies] Delete One', props<{ id: string }>()
 );
 
-export const actionCurrenciesLoad = createAction(
+export const actionCurrenciesRequestAll = createAction(
     '[Currencies] Load All'
+);
+
+export const actionCurrenciesFailRequest = createAction(
+    '[Currencies] Do on load failed', props<{ error: Error }>()
+);
+
+export const actionCurrenciesRequestCancelRequest = createAction(
+    '[Currencies] Cancel load'
 );

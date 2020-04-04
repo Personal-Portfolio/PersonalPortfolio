@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
     routeAnimations
-  } from '../../../core/core.module';
+  } from '../../../../core/core.module';
   
 @Component({
     selector: 'personal-portfolio-administration',

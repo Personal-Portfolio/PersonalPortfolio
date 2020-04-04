@@ -1,25 +1,31 @@
 import { Router } from '@angular/router';
 import { FormBuilder, NgForm } from '@angular/forms';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
-import { State } from '../../administration.state';
-import { Security } from '../security';
-import { actionSecuritiesLoad, actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../securities.actions';
-import { selectAllSecurities, selectSelectedSecurities } from '../../securities/securities.selectors';
+import { State } from '../../state/administration.state';
+import { Security } from '../../state/securities/security';
+import { SecurityType } from '../../state/security-types/security-type';
+
+import { actionSecuritiesRequestAll, actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../../state/securities/securities.actions';
+import { actionSecurityTypesRequestAll } from '../../state/security-types/security-types.actions';
+
+import { selectAllSecurities, selectSelectedSecurities } from '../../state/securities/securities.selectors';
+import { selectAllSecurityTypes } from '../../state/security-types/security-types.selectors';
 @Component({
     selector: 'personal-portfolio-securities',
     templateUrl: './securities.component.html',
     styleUrls: ['./securities.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SecuritiesComponent {
+export class SecuritiesComponent implements OnInit{
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
     securityFormGroup = this.fb.group(SecuritiesComponent.createSecurity());
     securities$: Observable<Security[]> = this.store.pipe(select(selectAllSecurities));
+    securityTypes$: Observable<SecurityType[]> = this.store.pipe(select(selectAllSecurityTypes));
     selectedSecurity$: Observable<Security> = this.store.pipe(select(selectSelectedSecurities));
 
     isEditing: boolean;
@@ -33,9 +39,13 @@ export class SecuritiesComponent {
         public fb: FormBuilder,
         private router: Router
     ) {
-        this.store.dispatch(actionSecuritiesLoad());
         this.isEditing = false;
      }
+
+     ngOnInit(): void {
+        this.store.dispatch(actionSecuritiesRequestAll());
+        this.store.dispatch(actionSecurityTypesRequestAll());
+    }
 
     select(security: Security) {
         this.isEditing = false;

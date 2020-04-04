@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
-import { selectRouterState } from '../../../core/core.module';
+import { selectRouterState } from '../../../../core/core.module';
 import { selectAdministration, AdministrationState } from '../administration.state';
 
 import { currenciesAdapter } from './currencies.reducer';
