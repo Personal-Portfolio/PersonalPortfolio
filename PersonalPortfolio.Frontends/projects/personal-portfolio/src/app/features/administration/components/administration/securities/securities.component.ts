@@ -4,17 +4,17 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../../core/core.module';
 
-import { State } from '../../state/administration.state';
-import { Security } from '../../state/securities/security';
-import { SecurityType } from '../../state/security-types/security-type';
+import { State } from '../../../state/administration.state';
+import { Security } from '../../../state/securities/security';
+import { SecurityType } from '../../../state/security-types/security-type';
 
-import { actionSecuritiesRequestAll, actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../../state/securities/securities.actions';
-import { actionSecurityTypesRequestAll } from '../../state/security-types/security-types.actions';
+import { actionSecuritiesRequestAll, actionSecuritiesDeleteOne, actionSecuritiesUpsertOne } from '../../../state/securities/securities.actions';
+import { actionSecurityTypesRequestAll } from '../../../state/security-types/security-types.actions';
 
-import { selectAllSecurities, selectSelectedSecurities } from '../../state/securities/securities.selectors';
-import { selectAllSecurityTypes } from '../../state/security-types/security-types.selectors';
+import { selectAllSecurities, selectSelectedSecurities } from '../../../state/securities/securities.selectors';
+import { selectAllSecurityTypes } from '../../../state/security-types/security-types.selectors';
 @Component({
     selector: 'personal-portfolio-securities',
     templateUrl: './securities.component.html',

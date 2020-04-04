@@ -9,7 +9,7 @@
             </mat-card>
             <p *ngIf="(currencies$ | async)?.length === 0">
                 {{'personal-portfolio.administration.currency.empty' | translate}}</p>
-            <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
+            <button type="button" mat-fab color="accent" class="add" [ngClass]="routeAnimationsElements"
                 *ngIf="!isEditing" (click)="addNew(currencyForm)">
                 <fa-icon icon="plus"></fa-icon>
             </button>

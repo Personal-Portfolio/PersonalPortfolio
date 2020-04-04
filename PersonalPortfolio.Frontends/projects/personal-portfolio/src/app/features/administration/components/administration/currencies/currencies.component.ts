@@ -4,12 +4,12 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../../core/core.module';
 
-import { State } from '../../state/administration.state';
-import { Currency } from '../../state/currencies/currency';
-import { actionCurrenciesRequestAll, actionCurrenciesDeleteOne, actionCurrenciesUpsertOne } from '../../state/currencies/currencies.actions';
-import { selectAllCurrencies, selectSelectedCurrencies } from '../../state/currencies/currencies.selectors';
+import { State } from '../../../state/administration.state';
+import { Currency } from '../../../state/currencies/currency';
+import { actionCurrenciesRequestAll, actionCurrenciesDeleteOne, actionCurrenciesUpsertOne } from '../../../state/currencies/currencies.actions';
+import { selectAllCurrencies, selectSelectedCurrencies } from '../../../state/currencies/currencies.selectors';
 
 
 @Component({

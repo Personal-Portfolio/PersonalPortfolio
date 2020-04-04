@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdministrationComponent } from './components/administration/administration.component';
-import { CurrenciesComponent } from './components/currencies/currencies.component';
-import { SecuritiesComponent } from './components/securities/securities.component';
+import { CurrenciesComponent } from './components/administration/currencies/currencies.component';
+import { SecuritiesComponent } from './components/administration/securities/securities.component';
 
 const routes: Routes = [
     {
