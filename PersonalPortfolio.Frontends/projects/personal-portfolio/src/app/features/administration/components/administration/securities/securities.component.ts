@@ -15,6 +15,10 @@ import { actionSecurityTypesRequestAll } from '../../../state/security-types/sec
 
 import { selectAllSecurities, selectSelectedSecurities } from '../../../state/securities/securities.selectors';
 import { selectAllSecurityTypes } from '../../../state/security-types/security-types.selectors';
+import { Currency } from '../../../state/currencies/currency';
+import { selectAllCurrencies } from '../../../state/currencies/currencies.selectors';
+import { actionCurrenciesRequestAll } from '../../../state/currencies/currencies.actions';
+
 @Component({
     selector: 'personal-portfolio-securities',
     templateUrl: './securities.component.html',
@@ -25,6 +29,7 @@ export class SecuritiesComponent implements OnInit{
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
     securityFormGroup = this.fb.group(SecuritiesComponent.createSecurity());
     securities$: Observable<Security[]> = this.store.pipe(select(selectAllSecurities));
+    currencies$: Observable<Currency[]> = this.store.pipe(select(selectAllCurrencies));
     securityTypes$: Observable<SecurityType[]> = this.store.pipe(select(selectAllSecurityTypes));
     selectedSecurity$: Observable<Security> = this.store.pipe(select(selectSelectedSecurities));
 
@@ -45,6 +50,7 @@ export class SecuritiesComponent implements OnInit{
      ngOnInit(): void {
         this.store.dispatch(actionSecuritiesRequestAll());
         this.store.dispatch(actionSecurityTypesRequestAll());
+        this.store.dispatch(actionCurrenciesRequestAll());
     }
 
     select(security: Security) {

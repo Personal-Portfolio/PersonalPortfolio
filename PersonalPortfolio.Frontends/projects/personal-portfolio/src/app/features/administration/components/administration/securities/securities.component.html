@@ -71,10 +71,14 @@
                 </div>
                 <div class="row">
                     <mat-form-field class="col">
-                        <input matInput
+                        <mat-select formControlName="currency"
                             placeholder="{{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}"
-                            formControlName="currency" rows="5" required />
-                        <mat-error *ngIf="securityFormGroup.get('type').invalid">
+                            required>
+                            <mat-option *ngFor="let currency of currencies$ | async" [value]="currency.id">
+                                {{currency.id}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="securityFormGroup.get('currency').invalid">
                             {{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}
                             {{ 'personal-portfolio.administration.security.error' | translate }}
                         </mat-error>
