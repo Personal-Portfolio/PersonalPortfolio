@@ -9,7 +9,6 @@
 @include mat-core();
 
 @import './themes/default-theme';
-@import './themes/light-theme';
 @import './themes/black-theme';
 @import './themes/nature-theme';
 
@@ -45,11 +44,6 @@
 .default-theme {
   @include angular-material-theme($personal-portfolio-theme);
   @include custom-components-theme($personal-portfolio-theme);
-}
-
-.light-theme {
-  @include angular-material-theme($personal-portfolio-light-theme);
-  @include custom-components-theme($personal-portfolio-light-theme);
 }
 
 .black-theme {

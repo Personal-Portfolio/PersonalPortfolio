@@ -1,9 +1,0 @@
-$personal-portfolio-light-primary: mat-palette($mat-grey, 200, 500, 300);
-$personal-portfolio-light-accent: mat-palette($mat-brown, 200);
-$personal-portfolio-light-warn: mat-palette($mat-deep-orange, 200);
-
-$personal-portfolio-light-theme: mat-light-theme(
-  $personal-portfolio-light-primary,
-  $personal-portfolio-light-accent,
-  $personal-portfolio-light-warn
-);

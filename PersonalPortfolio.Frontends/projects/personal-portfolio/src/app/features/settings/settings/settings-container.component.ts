@@ -27,7 +27,6 @@ export class SettingsContainerComponent implements OnInit {
 
   themes = [
     { value: 'DEFAULT-THEME', label: 'blue' },
-    { value: 'LIGHT-THEME', label: 'light' },
     { value: 'NATURE-THEME', label: 'nature' },
     { value: 'BLACK-THEME', label: 'dark' }
   ];

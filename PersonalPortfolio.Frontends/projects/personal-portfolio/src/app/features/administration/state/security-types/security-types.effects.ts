@@ -20,7 +20,7 @@ export class SecurityTypesEffects {
     () => this.actions$
             .pipe(
                 ofType(actionSecurityTypesRequestAll),
-                switchMap(actions => this.securityTypesService.getAll()
+                switchMap(() => this.securityTypesService.getAll()
                     .pipe(
                         map(items => actionSecurityTypesUpsertMany({ securityTypes: items }),
                         catchError(error =>
