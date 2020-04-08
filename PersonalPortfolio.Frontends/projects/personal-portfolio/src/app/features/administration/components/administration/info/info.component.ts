@@ -14,7 +14,7 @@ import { SecurityTypesDataSource } from './security-types.datasource';
 })
 export class InfoComponent implements OnInit {
 
-    displayedColumns = ['id'];
+    displayedColumns = ['type', 'category', 'description'];
     securityTypesDataSource: SecurityTypesDataSource;
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
     constructor(

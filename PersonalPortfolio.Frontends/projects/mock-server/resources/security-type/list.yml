@@ -27,6 +27,8 @@ get:
                 type: Bank deposits
                 category: Fixed income
       description: Successful response - returns an array of security types.
+    '304':
+      description: Not modified response.
   operationId: getSecurityTypes
   summary: List All security types
   description: Gets a list of all security types.

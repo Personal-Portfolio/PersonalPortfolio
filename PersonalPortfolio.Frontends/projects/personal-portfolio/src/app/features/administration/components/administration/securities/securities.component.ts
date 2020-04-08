@@ -14,7 +14,7 @@ import { actionSecuritiesRequestAll, actionSecuritiesDeleteOne, actionSecurities
 import { actionSecurityTypesRequestAll } from '../../../state/security-types/security-types.actions';
 
 import { selectAllSecurities, selectSelectedSecurities } from '../../../state/securities/securities.selectors';
-import { selectAllSecurityTypes } from '../../../state/security-types/security-types.selectors';
+import { selectAllSecurityTypes, selectSecurityType } from '../../../state/security-types/security-types.selectors';
 import { Currency } from '../../../state/currencies/currency';
 import { selectAllCurrencies } from '../../../state/currencies/currencies.selectors';
 import { actionCurrenciesRequestAll } from '../../../state/currencies/currencies.actions';
@@ -32,12 +32,14 @@ export class SecuritiesComponent implements OnInit {
     currencies$: Observable<Currency[]> = this.store.pipe(select(selectAllCurrencies));
     securityTypes$: Observable<SecurityType[]> = this.store.pipe(select(selectAllSecurityTypes));
     selectedSecurity$: Observable<Security> = this.store.pipe(select(selectSelectedSecurities));
+    securityTypeSelection$: Observable<(id: string) => SecurityType> = this.store.pipe(select(selectSecurityType));
 
     isEditing: boolean;
 
     static createSecurity(): Security {
         return { id: '', description: '', type: 'Equity', currency: 'USD' };
     }
+
 
     constructor(
         private store: Store<State>,

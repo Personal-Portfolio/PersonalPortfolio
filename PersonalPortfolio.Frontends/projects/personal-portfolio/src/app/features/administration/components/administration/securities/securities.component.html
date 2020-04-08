@@ -60,7 +60,7 @@
                             placeholder="{{ 'personal-portfolio.administration.security.type-placeholder' | translate }}"
                             required>
                             <mat-option *ngFor="let type of securityTypes$ | async" [value]="type.id">
-                                {{type.id}}
+                                {{type.type}}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="securityFormGroup.get('type').invalid">
@@ -116,7 +116,7 @@
                         <mat-card-subtitle>
                             <mat-chip-list aria-label="Security classification">
                                 <mat-chip color="primary" selected>
-                                    {{ selectedSecurity.type }}
+                                    {{ ((securityTypeSelection$ | async)(selectedSecurity.type)).type}}
                                 </mat-chip>
                                 <mat-chip color="accent" selected>
                                     {{ selectedSecurity.currency }}
