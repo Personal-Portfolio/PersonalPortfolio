@@ -11,7 +11,16 @@ get:
             type: array
             items:
               "$ref": '../../types/currency.yml'
+            example:
+            - code: USD
+              description: United States dollar
+            - code: EUR
+              description: EURO
+            - code: RUR
+              description: Russian Ruble
       description: Successful response - returns an array of `Currency` entities.
+    '304':
+      description: Not modified response.
   operationId: getcurrencies
   summary: List All currencies
   description: Gets a list of all `Currency` entities.

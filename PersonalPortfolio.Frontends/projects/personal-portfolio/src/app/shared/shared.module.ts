@@ -24,9 +24,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table'
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
+    faSyncAlt,
     faBars,
     faUserCircle,
     faPowerOff,
@@ -95,6 +98,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
+        MatExpansionModule,
         MatButtonModule,
         MatMenuModule,
         MatTabsModule,
@@ -108,6 +112,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
         MatSelectModule,
         MatToolbarModule,
         MatIconModule,
+        MatTableModule,
         MatTooltipModule,
         MatSelectModule,
         MatSnackBarModule,
@@ -125,6 +130,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
 export class SharedModule {
     constructor(library: FaIconLibrary) {
         library.addIcons(
+            faSyncAlt,
             faBars,
             faUserCircle,
             faPowerOff,

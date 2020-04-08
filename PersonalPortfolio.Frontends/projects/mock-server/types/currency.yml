@@ -7,6 +7,3 @@ properties:
     type: string
   code:
     type: string
-example:
-  code: USD
-  description: United States dollar

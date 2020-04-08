@@ -33,5 +33,7 @@
   "personal-portfolio.administration.security.tooltip.edit": "Edit security",
   "personal-portfolio.administration.menu.currencies": "Currencies",
   "personal-portfolio.administration.menu.securities": "Securities",
-  "personal-portfolio.administration.title": "Administration"
+  "personal-portfolio.administration.menu.system-info": "System",
+  "personal-portfolio.administration.title": "Administration",
+  "personal-portfolio.administration.info.title": "System Information"
 }

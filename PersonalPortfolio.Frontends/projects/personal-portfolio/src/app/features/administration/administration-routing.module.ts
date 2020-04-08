@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdministrationComponent } from './components/administration/administration.component';
 import { CurrenciesComponent } from './components/administration/currencies/currencies.component';
 import { SecuritiesComponent } from './components/administration/securities/securities.component';
+import { InfoComponent } from './components/administration/info/info.component';
 
 const routes: Routes = [
     {
@@ -34,6 +35,11 @@ const routes: Routes = [
                 path: 'securities/:id',
                 component: SecuritiesComponent,
                 data: { title: 'personal-portfolio.administration.menu.securities' }
+            },
+            {
+                path: 'system-info',
+                component: InfoComponent,
+                data: { title: 'personal-portfolio.administration.menu.system-info' }
             }
         ]
     }

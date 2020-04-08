@@ -10,14 +10,22 @@ get:
           schema:
             type: array
             items:
-              type: string
+              "$ref": '../../types/securityType.yml'
             example:
-              - Bonds
-              - Stock or Equities
-              - Bank deposits
-              - Cash or Equivalents
-              - Commodities
-              - Funds
+              - code: bonds
+                description: |
+                  Instruments of indebtedness of the bond issuer to the holders.
+                  The most common types of bonds include municipal bonds and corporate bonds. 
+                type: Bonds
+                category: Debt
+              - code: equities
+                description: Stocks
+                type: Stocks or Equities
+                category: Equity
+              - code: deposits
+                description: Bank deposits
+                type: Bank deposits
+                category: Fixed income
       description: Successful response - returns an array of security types.
   operationId: getSecurityTypes
   summary: List All security types

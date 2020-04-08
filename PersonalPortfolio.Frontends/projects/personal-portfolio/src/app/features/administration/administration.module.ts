@@ -19,6 +19,7 @@ import { SecuritiesService } from './services/securities.service';
 import { SecuritiesEffects } from './state/securities/securities.effects';
 import { SecurityTypesEffects } from './state/security-types/security-types.effects';
 import { SecurityTypesService } from './services/securities-types.service';
+import { InfoComponent } from './components/administration/info/info.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AdministrationComponent,
         CurrenciesComponent,
+        InfoComponent,
         SecuritiesComponent
     ],
     providers: [CurrenciesService, SecuritiesService, SecurityTypesService]

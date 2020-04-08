@@ -11,6 +11,8 @@
     "build:prod": "ng build --prod",
     "prism": "prism",
     "mocker": "prism mock projects/mock-server/openapi.yml",
+    "prism:proxy": "prism proxy projects/mock-server/openapi.yml http://localhost:3000 --errors",
+    "api:compile": "speccy resolve ./projects/mock-server/openapi.yml -o ./projects/mock-server/result.yml",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",
     "watch": "ng test --configuration=test --browsers ChromeHeadless --watch",
@@ -78,6 +80,7 @@
     "tslint": "^5.15.0",
     "typescript": "~3.8.3",
     "@stoplight/prism-cli": "^3.3.2",
+    "speccy": "^0.11.0",
     "webpack-bundle-analyzer": "^3.3.2"
   }
 }

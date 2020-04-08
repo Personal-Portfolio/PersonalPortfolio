@@ -25,7 +25,7 @@ import { actionCurrenciesRequestAll } from '../../../state/currencies/currencies
     styleUrls: ['./securities.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SecuritiesComponent implements OnInit{
+export class SecuritiesComponent implements OnInit {
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
     securityFormGroup = this.fb.group(SecuritiesComponent.createSecurity());
     securities$: Observable<Security[]> = this.store.pipe(select(selectAllSecurities));
@@ -40,14 +40,14 @@ export class SecuritiesComponent implements OnInit{
     }
 
     constructor(
-        public store: Store<State>,
+        private store: Store<State>,
         public fb: FormBuilder,
         private router: Router
     ) {
         this.isEditing = false;
-     }
+    }
 
-     ngOnInit(): void {
+    ngOnInit(): void {
         this.store.dispatch(actionSecuritiesRequestAll());
         this.store.dispatch(actionSecurityTypesRequestAll());
         this.store.dispatch(actionCurrenciesRequestAll());

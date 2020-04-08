@@ -1,22 +1,29 @@
----
 openapi: 3.0.0
 info:
   title: Personal Portfolio Configuration API
   version: '1.0'
+  contact:
+    name: Evgeny
+  description: Personal Portfolio Configuration API
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
 paths:
-  "/api/currencies":
-    "$ref": './resources/currency/list.yml'
-  "/api/currencies/{id}":
-    "$ref": './resources/currency/single.yml'
-  "/api/securities":
-    "$ref": './resources/security/list.yml'
-  "/api/securities/{id}":
-    "$ref": './resources/security/single.yml'
-  "/api/security-types":
-    "$ref": './resources/security-type/list.yml'
+  '/api/currencies':
+    $ref: ./resources/currency/list.yml
+  '/api/currencies/{id}':
+    $ref: ./resources/currency/single.yml
+  '/api/securities':
+    $ref: ./resources/security/list.yml
+  '/api/securities/{id}':
+    $ref: ./resources/security/single.yml
+  '/api/security-types':
+    $ref: ./resources/security-type/list.yml
 components:
   schemas:
     Currency:
-      "$ref": './types/currency.yml'
+      $ref: ./types/currency.yml
     Security:
-      "$ref": './types/security.yml'
+      $ref: ./types/security.yml
+    SecurityType:
+      $ref: ./types/securityType.yml
