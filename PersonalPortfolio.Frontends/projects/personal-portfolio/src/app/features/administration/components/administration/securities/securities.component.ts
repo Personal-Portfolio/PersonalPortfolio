@@ -16,7 +16,7 @@ import { actionSecurityTypesRequestAll } from '../../../state/security-types/sec
 import { selectAllSecurities, selectSelectedSecurities } from '../../../state/securities/securities.selectors';
 import { selectAllSecurityTypes, selectSecurityType } from '../../../state/security-types/security-types.selectors';
 import { Currency } from '../../../state/currencies/currency';
-import { selectAllCurrencies } from '../../../state/currencies/currencies.selectors';
+import { selectAllCurrencies, selectCurrecy } from '../../../state/currencies/currencies.selectors';
 import { actionCurrenciesRequestAll } from '../../../state/currencies/currencies.actions';
 
 @Component({
@@ -33,6 +33,7 @@ export class SecuritiesComponent implements OnInit {
     securityTypes$: Observable<SecurityType[]> = this.store.pipe(select(selectAllSecurityTypes));
     selectedSecurity$: Observable<Security> = this.store.pipe(select(selectSelectedSecurities));
     securityTypeSelection$: Observable<(id: string) => SecurityType> = this.store.pipe(select(selectSecurityType));
+    currencySelection$: Observable<(id: string) => Currency> = this.store.pipe(select(selectCurrecy));
 
     isEditing: boolean;
 

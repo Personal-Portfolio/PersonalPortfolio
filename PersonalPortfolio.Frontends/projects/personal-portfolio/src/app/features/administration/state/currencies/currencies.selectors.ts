@@ -18,3 +18,8 @@ export const selectSelectedCurrencies = createSelector(
     selectRouterState,
     (entities, params) => params && entities[params.state.params.id]
 );
+
+export const selectCurrecy = createSelector(
+    selectCurrenciesEntities, 
+    currencies => (id: string) => currencies[id]
+  );

@@ -115,11 +115,11 @@
                         </mat-card-title>
                         <mat-card-subtitle>
                             <mat-chip-list aria-label="Security classification">
-                                <mat-chip color="primary" selected>
+                                <mat-chip color="primary" selected [matTooltip]="((securityTypeSelection$ | async)(selectedSecurity.type)).description">
                                     {{ ((securityTypeSelection$ | async)(selectedSecurity.type)).type}}
                                 </mat-chip>
-                                <mat-chip color="accent" selected>
-                                    {{ selectedSecurity.currency }}
+                                <mat-chip color="accent" selected [matTooltip]="((currencySelection$ | async)(selectedSecurity.currency)).description">
+                                    {{ selectedSecurity.currency }} 
                                 </mat-chip>
                             </mat-chip-list>
                         </mat-card-subtitle>
