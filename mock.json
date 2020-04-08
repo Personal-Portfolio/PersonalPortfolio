@@ -1,0 +1,128 @@
+{
+    "source": "mockoon:1.7.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "PersonalPortfolio Admin API",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 3000,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "api/currencies",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "[\r\n    {\r\n        \"code\": \"USD\",\r\n        \"description\": \"United States dollar\"\r\n    },\r\n    {\r\n        \"code\": \"EUR\",\r\n        \"description\": \"EURO\"\r\n    },\r\n    {\r\n        \"code\": \"RUR\",\r\n        \"description\": \"Russian Ruble\"\r\n    }\r\n]",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "api/security-types",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "[\r\n    {\r\n        \"code\": \"bonds\",\r\n        \"description\": \"Instruments of indebtedness of the bond issuer to the holders.\\nThe most common types of bonds include municipal bonds and corporate bonds.\",\r\n        \"type\": \"Bonds\",\r\n        \"category\": \"Debt\"\r\n    },\r\n    {\r\n        \"code\": \"equities\",\r\n        \"description\": \"Stocks\",\r\n        \"type\": \"Stocks or Equities\",\r\n        \"category\": \"Equity\"\r\n    },\r\n    {\r\n        \"code\": \"deposits\",\r\n        \"description\": \"Bank deposits\",\r\n        \"type\": \"Bank deposits\",\r\n        \"category\": \"Fixed income\"\r\n    }\r\n]",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "api/securities",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "[\r\n    {\r\n        \"code\": \"FXRU\",\r\n        \"description\": \"FinEX Russian corporate bonds ETF\",\r\n        \"type\": \"Funds\",\r\n        \"currency\": \"RUR\"\r\n    }\r\n]",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "api/securities/:var",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": false,
+                "cors": false,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        }
+    ]
+}
