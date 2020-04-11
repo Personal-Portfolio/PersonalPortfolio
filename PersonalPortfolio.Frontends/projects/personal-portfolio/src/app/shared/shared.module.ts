@@ -52,7 +52,8 @@ import {
     faLightbulb,
     faWindowMaximize,
     faStream,
-    faBook
+    faBook,
+    faSave
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faGithub,
@@ -142,6 +143,7 @@ export class SharedModule {
             faPlus,
             faEdit,
             faTrash,
+            faSave,
             faTimes,
             faCaretUp,
             faCaretDown,

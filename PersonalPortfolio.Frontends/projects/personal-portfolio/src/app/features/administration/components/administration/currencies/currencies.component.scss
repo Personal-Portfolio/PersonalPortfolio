@@ -1,26 +1,47 @@
-h1 {
+ 
+  h1 {
     margin: 0 0 20px 0;
     text-transform: uppercase;
   }
-  
-  mat-card {
-    margin: 0 0 10px 0;
-    cursor: pointer;
-  }
-  
-  .mat-fab {
-    .fa-icon {
-      position: relative;
-      top: 4px;
-    }
-  }
-  
+   
   .add {
     margin: 20px auto 0;
     display: block;
   }
   
-  .col-md-6 {
-    margin-bottom: 20px;
+  table {
+    width: 100%;
+
+    mat-card {
+        width: 100%;
+        margin: 10px;
+    }
+  
+  }
+  
+  tr {
+    &.currency-detail-row {
+      height: 0;
+    }
+  
+    &.currency-row:not(.example-expanded-row) {
+      &:hover {
+        background: orange;
+        cursor: pointer;
+      }
+  
+      &:active {
+        background: orange;
+      }
+    }
+  }
+  
+  .currency-row td {
+    border-bottom-width: 0;
+  }
+  
+  .currency-detail {
+    overflow: hidden;
+    display: flex;
   }
   

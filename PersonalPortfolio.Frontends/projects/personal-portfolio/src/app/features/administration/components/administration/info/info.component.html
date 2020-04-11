@@ -37,19 +37,19 @@
                 <mat-card>
                     <table mat-table [dataSource]="securityTypesDataSource" class="mat-elevation-z8">
                         <ng-container matColumnDef="type">
-                            <th mat-header-cell *matHeaderCellDef> Type </th>
-                            <td mat-cell *matCellDef="let type"> {{type.type}} </td>
+                            <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.type}} </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="category">
-                            <th mat-header-cell *matHeaderCellDef> Category </th>
-                            <td mat-cell *matCellDef="let type"> {{type.category}} </td>
+                            <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.category}} </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="description">
-                            <th mat-header-cell *matHeaderCellDef> Description </th>
-                            <td mat-cell *matCellDef="let type"> {{type.description}} </td>
+                            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.description}} </mat-cell>
                         </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row >
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                     </table>
                 </mat-card>
 
