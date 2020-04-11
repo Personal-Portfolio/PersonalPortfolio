@@ -33,6 +33,7 @@ export class SettingsContainerComponent implements OnInit {
 
   languages = [
     { value: 'en', label: 'en' },
+    { value: 'ru', label: 'ru' },
     { value: 'de', label: 'de' }
   ];
 
