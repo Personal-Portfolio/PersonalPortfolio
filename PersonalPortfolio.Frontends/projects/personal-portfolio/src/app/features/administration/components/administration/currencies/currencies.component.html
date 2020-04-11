@@ -16,11 +16,12 @@
                             <mat-card-content>
                                 <form #currencyForm="ngForm" [formGroup]="currencyFormGroup"
                                     [ngClass]="routeAnimationsElements">
-                                    <mat-form-field class="col">
-                                        <textarea matInput
+                                    <mat-form-field class="col" appearance="outline">
+                                        <mat-label>{{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}</mat-label>
+                                        <input matInput
                                             placeholder="{{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}"
-                                            formControlName="description" rows="2">
-                                    </textarea>
+                                            formControlName="description"
+                                            required>
                                         <mat-error *ngIf="currencyFormGroup.get('description').invalid">
                                             {{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}
                                             {{ 'personal-portfolio.administration.currency.error' | translate }}

@@ -22,9 +22,11 @@
 @import './app/features/examples/theming/parent/parent.component.theme';
 @import './app/features/examples/theming/child/child.component.theme';
 @import './app/features/examples/examples/examples.component.theme';
+@import './app/features/administration/components/administration/currencies/currencies.component.theme';
 
 @mixin custom-components-theme($theme) {
     // Administration
+    @include personal-portfolio-admin-currencies-component-theme($theme);
 
     // Examples
     @include personal-portfolio-big-input-component-theme($theme);
