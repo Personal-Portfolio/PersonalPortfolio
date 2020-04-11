@@ -29,11 +29,10 @@ import { withLatestFrom } from 'rxjs/operators';
 })
 export class CurrenciesComponent implements OnInit, OnDestroy {
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-
-    currencyFormGroup = this.fb.group(CurrenciesComponent.createCurrency());
+    editCurrencyFormGroup = this.fb.group(CurrenciesComponent.createCurrency());
+    addCurrencyFormGroup = this.fb.group(CurrenciesComponent.createCurrency());
     currencies$: Observable<Currency[]> = this.store.pipe(select(selectAllCurrencies));
     selectedCurrency$: Observable<Currency> = this.store.pipe(select(selectSelectedCurrencies));
-
     currenciesDataSource: CurrenciesDataSource;
 
     private _rowClick = new BehaviorSubject<Currency>(null);
@@ -68,6 +67,7 @@ export class CurrenciesComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.rowClickSubscription.unsubscribe();
     }
+
     ngOnInit(): void {
         this.store.dispatch(actionCurrenciesRequestAll());
         this.rowClickSubscription = this.rowClick$.pipe(withLatestFrom(this.selectedCurrency$))
@@ -85,8 +85,12 @@ export class CurrenciesComponent implements OnInit, OnDestroy {
     }
 
     select(currency: Currency) {
-        this.currencyFormGroup.reset();
-        this.currencyFormGroup.setValue(currency);
+        this.addCurrencyFormGroup.reset();
+        this.addCurrencyFormGroup.setValue(CurrenciesComponent.createCurrency());
+
+        this.editCurrencyFormGroup.reset();
+        this.editCurrencyFormGroup.setValue(currency);
+        
         this.router.navigate(['admin/currencies', currency.id]);
     }
 
@@ -94,24 +98,27 @@ export class CurrenciesComponent implements OnInit, OnDestroy {
         this.router.navigate(['admin/currencies']);
     }
 
-    addNew(currencyForm: NgForm) {
-        currencyForm.resetForm();
-        this.currencyFormGroup.reset();
-        this.currencyFormGroup.setValue(CurrenciesComponent.createCurrency());
-    }
-
     delete(currency: Currency) {
         this.store.dispatch(actionCurrenciesDeleteOne({ id: currency.id }));
         this.router.navigate(['admin/currencies']);
     }
 
-    save() {
-        if (!this.currencyFormGroup.valid) {
+    create() {
+        if (!this.addCurrencyFormGroup.valid) {
             return;
         }
 
-        const currency = this.currencyFormGroup.value;
+        const currency = this.addCurrencyFormGroup.value;
         this.store.dispatch(actionCurrenciesUpsertOne({ currency }));
-        this.router.navigate(['admin/currencies', currency.id]);
+        this.select(currency);
+    }
+    
+    save() {
+        if (!this.editCurrencyFormGroup.valid) {
+            return;
+        }
+
+        const currency = this.editCurrencyFormGroup.value;
+        this.store.dispatch(actionCurrenciesUpsertOne({ currency }));
     }
 }
