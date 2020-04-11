@@ -14,21 +14,20 @@ import { CurrenciesDataSource } from './currencies.datasource';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { withLatestFrom } from 'rxjs/operators';
 
-
 @Component({
     selector: 'personal-portfolio-currencies',
     templateUrl: './currencies.component.html',
     styleUrls: ['./currencies.component.scss'],
     animations: [
         trigger('detailExpand', [
-          state('collapsed', style({height: '0px', minHeight: '0'})),
-          state('expanded', style({height: '*'})),
-          transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+            state('collapsed', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
         ]),
-      ],
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CurrenciesComponent implements OnInit, OnDestroy{
+export class CurrenciesComponent implements OnInit, OnDestroy {
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
     currencyFormGroup = this.fb.group(CurrenciesComponent.createCurrency());
@@ -45,11 +44,19 @@ export class CurrenciesComponent implements OnInit, OnDestroy{
         return { id: '', description: '' };
     }
 
-    displayedColumns = ['id', 'description'];
-    displayedColumnsNames = {
-        id: 'personal-portfolio.administration.currency.code-placeholder',
-        description: 'personal-portfolio.administration.currency.description-placeholder'
-    };
+    columnDefinitions: {id: string, header: string, placeholderKey: string}[] = [{
+        id: 'id',
+        header: 'personal-portfolio.administration.currency.code-header',
+        placeholderKey: 'personal-portfolio.administration.currency.code-placeholder'
+    }, {
+        id: 'description',
+        header: 'personal-portfolio.administration.currency.description-header',
+        placeholderKey: 'personal-portfolio.administration.currency.description-placeholder'
+    }]
+
+    get columns(): string[] {
+        return this.columnDefinitions.map(c => c.id);
+    }
 
     constructor(
         public store: Store<State>,
@@ -65,9 +72,9 @@ export class CurrenciesComponent implements OnInit, OnDestroy{
         this.store.dispatch(actionCurrenciesRequestAll());
         this.rowClickSubscription = this.rowClick$.pipe(withLatestFrom(this.selectedCurrency$))
             .subscribe(([click, selection]) => {
-                if(click && selection && selection.id === click.id) {
+                if (click && selection && selection.id === click.id) {
                     this.deselect();
-                } else if (click){
+                } else if (click) {
                     this.select(click);
                 }
             });
@@ -78,6 +85,7 @@ export class CurrenciesComponent implements OnInit, OnDestroy{
     }
 
     select(currency: Currency) {
+        this.currencyFormGroup.reset();
         this.currencyFormGroup.setValue(currency);
         this.router.navigate(['admin/currencies', currency.id]);
     }

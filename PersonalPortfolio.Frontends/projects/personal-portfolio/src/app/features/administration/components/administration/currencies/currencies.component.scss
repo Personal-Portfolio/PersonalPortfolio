@@ -10,33 +10,40 @@
   }
   
   table {
-    width: 100%;
-
-    mat-card {
-        width: 100%;
-        margin: 10px;
-    }
-  
+    width: 100%;  
   }
   
   tr {
-    &.currency-detail-row {
+    &.detail-row {
       height: 0;
     }
+
+    &.new-item-row {
+        height: auto;
+        border-top: 1px solid;
+
+        td {
+            padding: 10px;
+        }
+    }
   
-    &.currency-row:not(.example-expanded-row) {
+    &.item-row {
       &:hover {
         cursor: pointer;
       }
     }
   }
   
-  .currency-row td {
+  .item-row td {
     border-bottom-width: 0;
   }
   
-  .currency-detail {
+  .details-cell-area {
     overflow: hidden;
-    display: flex;
+    margin: 5px 20px;
+    span {
+        width: 100%;
+        margin: 10px;
+    }
   }
   
