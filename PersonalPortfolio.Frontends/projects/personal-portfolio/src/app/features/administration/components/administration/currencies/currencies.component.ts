@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, FormGroup } from '@angular/forms';
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
@@ -39,8 +39,13 @@ export class CurrenciesComponent implements OnInit, OnDestroy {
     private rowClick$: Observable<Currency> = this._rowClick.asObservable();
     private rowClickSubscription: Subscription; // TODO: get rid of this
 
-    static createCurrency(): Currency {
+    private static createCurrency(): Currency {
         return { id: '', description: '' };
+    }
+
+    private resetForm(formGruop: FormGroup) {
+        formGruop.reset();
+        formGruop.setValue(CurrenciesComponent.createCurrency());
     }
 
     columnDefinitions: {id: string, header: string, placeholderKey: string}[] = [{
@@ -95,12 +100,14 @@ export class CurrenciesComponent implements OnInit, OnDestroy {
     }
 
     deselect() {
+        this.resetForm(this.addCurrencyFormGroup);
+        this.resetForm(this.editCurrencyFormGroup);
         this.router.navigate(['admin/currencies']);
     }
 
     delete(currency: Currency) {
         this.store.dispatch(actionCurrenciesDeleteOne({ id: currency.id }));
-        this.router.navigate(['admin/currencies']);
+        this.deselect();
     }
 
     create() {

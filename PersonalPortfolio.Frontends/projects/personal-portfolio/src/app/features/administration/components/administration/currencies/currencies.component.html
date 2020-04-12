@@ -66,14 +66,20 @@
             <!-- Footer column - add new -->
             <ng-container matColumnDef="expandedNew">
                 <td mat-footer-cell *matFooterCellDef [attr.colspan]="columnDefinitions.length">
-                    <form #currencyNewForm="ngForm" [formGroup]="addCurrencyFormGroup" [ngClass]="routeAnimationsElements">
+                    <form #currencyNewForm="ngForm" [formGroup]="addCurrencyFormGroup"
+                        [ngClass]="routeAnimationsElements">
                         <span class="d-flex justify-content-between align-items-baseline">
                             <mat-form-field *ngFor="let column of columnDefinitions" class="col"
                                 [ngClass]="routeAnimationsElements">
-                                <input matInput placeholder="{{column.placeholderKey | translate}}"
-                                    formControlName="{{column.id}}" required>
+                                <input matInput placeholder="{{ column.placeholderKey | translate }}"
+                                    formControlName="{{ column.id }}" required>
+                                <mat-error *ngIf="addCurrencyFormGroup.get(column.id).invalid">
+                                    {{ column.header | translate }}
+                                    {{ 'personal-portfolio.administration.currency.error' | translate }}
+                                </mat-error>
                             </mat-form-field>
-                            <button mat-icon-button color="accent" (click)="create(currencyNewForm)" [ngClass]="routeAnimationsElements">
+                            <button mat-icon-button color="accent" (click)="create(currencyNewForm)"
+                                [ngClass]="routeAnimationsElements">
                                 <fa-icon icon="plus"
                                     [matTooltip]="'personal-portfolio.administration.currency.save' | translate"
                                     matTooltipPosition="above">
