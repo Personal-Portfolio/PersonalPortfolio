@@ -9,21 +9,231 @@ info:
     name: MIT License
     url: 'https://opensource.org/licenses/MIT'
 paths:
-  '/api/currencies':
-    $ref: ./resources/currency/list.yml
-  '/api/currencies/{id}':
-    $ref: ./resources/currency/single.yml
-  '/api/securities':
-    $ref: ./resources/security/list.yml
-  '/api/securities/{id}':
-    $ref: ./resources/security/single.yml
-  '/api/security-types':
-    $ref: ./resources/security-type/list.yml
+  /api/currencies:
+    summary: Path used to manage the list of currencies.
+    description: 'The REST endpoint/path used to list `Currency` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.'
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Currency'
+              examples:
+                Default:
+                  value:
+                    - code: USD
+                      description: United States dollar
+                    - code: EUR
+                      description: EURO
+                    - code: RUR
+                      description: Russian Ruble
+          description: Successful response - returns an array of `Currency` entities.
+        '304':
+          description: Not modified response.
+      operationId: getcurrencies
+      summary: List All currencies
+      description: Gets a list of all `Currency` entities.
+  /api/security-types:
+    get:
+      summary: List All security types
+      responses:
+        '200':
+          description: Successful response - returns an array of security types.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - code: bonds
+                    description: "Instruments of indebtedness of the bond issuer to the holders.\nThe most common types of bonds include municipal bonds and corporate bonds. \n"
+                    type: Bonds
+                    category: Debt
+                  - code: equities
+                    description: Stocks
+                    type: Stocks or Equities
+                    category: Equity
+                  - code: deposits
+                    description: Bank deposits
+                    type: Bank deposits
+                    category: Fixed income
+                items:
+                  $ref: '#/components/schemas/SecurityType'
+        '304':
+          description: Not modified response.
+      operationId: getSecurityTypes
+      description: Gets a list of all security types.
+    description: |
+      The REST endpoint/path used to list security types.
+      This path contains a `GET` to perform the list operation.
+    summary: Path used to manage the list of security types.
+  /api/securities:
+    summary: Path used to manage the list of securities.
+    description: 'The REST endpoint/path used to list `Security` entities.  This path contains a `GET` and `POST` operation to perform the list and create security, respectively.'
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Security'
+          description: Successful response - returns an array of `Security` entities.
+        '304':
+          description: Not modified response.
+      operationId: getsecurities
+      summary: List All securities
+      description: Gets a list of all `Security` entities.
+  '/api/currencies/{code}':
+    summary: Path used to manage a single Currency.
+    description: 'The REST endpoint/path used to get, update, and delete single instances of an `Currency`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.'
+    get:
+      operationId: getCurrency
+      summary: Get a Currency
+      description: Gets the details of a single instance of a `Currency`.
+      responses:
+        '200':
+          description: Successful response - returns a single `Currency`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+              examples:
+                USD:
+                  value:
+                    code: USD
+                    description: United States dollar
+                EUR:
+                  value:
+                    code: EUR
+                    description: EURO
+                RUR:
+                  value:
+                    code: RUR
+                    description: Russian Ruble
+    put:
+      requestBody:
+        description: Updated `Currency` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Currency'
+        required: true
+      responses:
+        '202':
+          description: Successful response.
+      operationId: updateCurrency
+      summary: Update a Currency
+      description: Updates an existing `Currency`.
+    delete:
+      responses:
+        '204':
+          description: Successful response.
+      operationId: deleteCurrency
+      summary: Delete a Currency
+      description: Deletes an existing `Currency`.
+    parameters:
+      - name: code
+        description: A unique identifier for a `Currency`.
+        schema:
+          type: string
+          maxLength: 4
+          minLength: 3
+          pattern: '[A-Za-z]'
+        in: path
+        required: true
+  '/api/securities/{code}':
+    summary: Path used to manage a single security.
+    description: 'The REST endpoint/path used to get, update, and delete single instances of an `Security`. This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.'
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Security'
+          description: Successful response - returns a single `Security`.
+      operationId: getSecurity
+      summary: Get a Security
+      description: Gets the details of a single instance of a `Security`.
+    put:
+      requestBody:
+        description: Updated `Security` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Security'
+        required: true
+      responses:
+        '202':
+          description: Successful response.
+      operationId: updateSecurity
+      summary: Update a Security
+      description: Updates an existing `Security`.
+    delete:
+      responses:
+        '204':
+          description: Successful response.
+      operationId: deleteSecurity
+      summary: Delete a Security
+      description: Deletes an existing `Security`.
+    parameters:
+      - name: code
+        description: A unique identifier for a `Security`.
+        schema:
+          type: string
+          maxLength: 4
+          minLength: 3
+          pattern: '[A-Za-z]'
+        in: path
+        required: true
 components:
   schemas:
     Currency:
-      $ref: ./types/currency.yml
+      title: Type for Currency
+      description: ''
+      type: object
+      properties:
+        description:
+          type: string
+        code:
+          type: string
     Security:
-      $ref: ./types/security.yml
+      title: Type for Security
+      description: ''
+      type: object
+      properties:
+        description:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+        currency:
+          type: string
+      example:
+        code: FXRU
+        description: FinEX Russian corporate bonds ETF
+        type: Funds
+        currency: RUR
     SecurityType:
-      $ref: ./types/securityType.yml
+      title: Type for Security Type
+      description: ''
+      type: object
+      properties:
+        description:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+        category:
+          type: string
+tags:
+  - name: admin
+  - name: temp
+servers:
+  - url: 'localhost:3000'

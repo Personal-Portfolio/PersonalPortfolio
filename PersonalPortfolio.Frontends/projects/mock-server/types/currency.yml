@@ -1,9 +1,0 @@
----
-title: Type for Currency
-description: ''
-type: object
-properties:
-  description:
-    type: string
-  code:
-    type: string
