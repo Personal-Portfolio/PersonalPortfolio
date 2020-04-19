@@ -187,9 +187,6 @@ paths:
         description: A unique identifier for a `Security`.
         schema:
           type: string
-          maxLength: 4
-          minLength: 3
-          pattern: '[A-Za-z]'
         in: path
         required: true
 components:
