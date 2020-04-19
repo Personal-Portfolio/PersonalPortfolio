@@ -46,21 +46,23 @@ paths:
             application/json:
               schema:
                 type: array
-                example:
-                  - code: bonds
-                    description: "Instruments of indebtedness of the bond issuer to the holders.\nThe most common types of bonds include municipal bonds and corporate bonds. \n"
-                    type: Bonds
-                    category: Debt
-                  - code: equities
-                    description: Stocks
-                    type: Stocks or Equities
-                    category: Equity
-                  - code: deposits
-                    description: Bank deposits
-                    type: Bank deposits
-                    category: Fixed income
                 items:
                   $ref: '#/components/schemas/SecurityType'
+              examples:
+                Default:
+                  value:
+                    - code: bonds
+                      description: "Instruments of indebtedness of the bond issuer to the holders.\nThe most common types of bonds include municipal bonds and corporate bonds. \n"
+                      type: Bonds
+                      category: Debt
+                    - code: equities
+                      description: Stocks
+                      type: Stocks or Equities
+                      category: Equity
+                    - code: deposits
+                      description: Bank deposits
+                      type: Bank deposits
+                      category: Fixed income
         '304':
           description: Not modified response.
       operationId: getSecurityTypes
