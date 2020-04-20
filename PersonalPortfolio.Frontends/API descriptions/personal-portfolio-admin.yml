@@ -217,8 +217,8 @@ paths:
 components:
   schemas:
     Currency:
-      title: Type for Currency
-      description: ''
+      title: Currency
+      description: Type for Currency objects
       type: object
       properties:
         description:
@@ -226,8 +226,8 @@ components:
         code:
           type: string
     Security:
-      title: Type for Security
-      description: ''
+      title: Security
+      description: Type for Security objects
       type: object
       properties:
         description:
@@ -239,8 +239,8 @@ components:
         currency:
           type: string
     SecurityType:
-      title: Type for Security Type
-      description: ''
+      title: Security Type
+      description: Type for Security Type objects
       type: object
       properties:
         description:
