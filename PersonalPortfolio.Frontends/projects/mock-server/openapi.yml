@@ -36,6 +36,8 @@ paths:
       operationId: getcurrencies
       summary: List All currencies
       description: Gets a list of all `Currency` entities.
+      tags:
+        - currency
   /api/security-types:
     get:
       summary: List All security types
@@ -67,6 +69,8 @@ paths:
           description: Not modified response.
       operationId: getSecurityTypes
       description: Gets a list of all security types.
+      tags:
+        - security
     description: |
       The REST endpoint/path used to list security types.
       This path contains a `GET` to perform the list operation.
@@ -83,12 +87,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Security'
+              examples:
+                Default:
+                  value:
+                    - code: FXRU
+                      description: FinEX Russian corporate bonds ETF
+                      type: Funds
+                      currency: RUR
           description: Successful response - returns an array of `Security` entities.
         '304':
           description: Not modified response.
       operationId: getsecurities
       summary: List All securities
       description: Gets a list of all `Security` entities.
+      tags:
+        - security
   '/api/currencies/{code}':
     summary: Path used to manage a single Currency.
     description: 'The REST endpoint/path used to get, update, and delete single instances of an `Currency`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.'
@@ -116,6 +129,8 @@ paths:
                   value:
                     code: RUR
                     description: Russian Ruble
+      tags:
+        - currency
     put:
       requestBody:
         description: Updated `Currency` information.
@@ -130,6 +145,8 @@ paths:
       operationId: updateCurrency
       summary: Update a Currency
       description: Updates an existing `Currency`.
+      tags:
+        - currency
     delete:
       responses:
         '204':
@@ -137,6 +154,8 @@ paths:
       operationId: deleteCurrency
       summary: Delete a Currency
       description: Deletes an existing `Currency`.
+      tags:
+        - currency
     parameters:
       - name: code
         description: A unique identifier for a `Currency`.
@@ -161,6 +180,8 @@ paths:
       operationId: getSecurity
       summary: Get a Security
       description: Gets the details of a single instance of a `Security`.
+      tags:
+        - security
     put:
       requestBody:
         description: Updated `Security` information.
@@ -175,6 +196,8 @@ paths:
       operationId: updateSecurity
       summary: Update a Security
       description: Updates an existing `Security`.
+      tags:
+        - security
     delete:
       responses:
         '204':
@@ -182,6 +205,8 @@ paths:
       operationId: deleteSecurity
       summary: Delete a Security
       description: Deletes an existing `Security`.
+      tags:
+        - security
     parameters:
       - name: code
         description: A unique identifier for a `Security`.
@@ -213,11 +238,6 @@ components:
           type: string
         currency:
           type: string
-      example:
-        code: FXRU
-        description: FinEX Russian corporate bonds ETF
-        type: Funds
-        currency: RUR
     SecurityType:
       title: Type for Security Type
       description: ''
@@ -232,7 +252,11 @@ components:
         category:
           type: string
 tags:
-  - name: admin
-  - name: temp
+  - name: system-configuration-frontend
+    description: Methods for system configuration app
+  - name: currency
+    description: Methods related to currencies
+  - name: security
+    description: Methods related to securities
 servers:
   - url: 'localhost:3000'
