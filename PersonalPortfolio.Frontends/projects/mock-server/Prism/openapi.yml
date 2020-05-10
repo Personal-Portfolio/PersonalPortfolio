@@ -9,7 +9,7 @@ info:
     name: MIT License
     url: 'https://opensource.org/licenses/MIT'
 paths:
-  /api/currencies:
+  '/api/currencies':
     summary: Path used to manage the list of currencies.
     description: 'The REST endpoint/path used to list `Currency` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.'
     get:
@@ -38,7 +38,7 @@ paths:
       description: Gets a list of all `Currency` entities.
       tags:
         - currency
-  /api/security-types:
+  '/api/security-types':
     get:
       summary: List All security types
       responses:
@@ -75,7 +75,7 @@ paths:
       The REST endpoint/path used to list security types.
       This path contains a `GET` to perform the list operation.
     summary: Path used to manage the list of security types.
-  /api/securities:
+  '/api/securities':
     summary: Path used to manage the list of securities.
     description: 'The REST endpoint/path used to list `Security` entities.  This path contains a `GET` and `POST` operation to perform the list and create security, respectively.'
     get:
