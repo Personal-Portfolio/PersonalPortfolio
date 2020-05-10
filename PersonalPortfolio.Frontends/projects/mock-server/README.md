@@ -3,7 +3,7 @@ The PP is developing as the API-first application so new features should be impl
 Here is the place to store sources for all parts of the API development - Design, Documentation, Mock, Validation, etc.
 
 # What tools we use
-- [Stoplight studio](https://stoplight.io/studio/) - for designing and bundling and linting.
+- [Stoplight studio](https://stoplight.io/studio/) - for designing, bundling and linting.
 - [Stoplight Prism](https://stoplight.io/open-source/prism/) - as mock and API validation proxy
 - [Mockoon](https://github.com/mockoon/mockoon) - Flexible GUI-based mock server
 - [Postman](https://personal-portfolio.postman.co/workspaces/23c7f46f-2ca3-4514-8c29-bb3b8b3478e7/apis) - for testing
