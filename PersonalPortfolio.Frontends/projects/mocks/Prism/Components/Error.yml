@@ -1,0 +1,14 @@
+title: Error
+description: 'Type for Json API error object'
+type: object
+properties:
+  id:
+    type: number
+  status:
+    type: string
+  code:
+    type: number
+  title:
+    type: string
+  detail:
+    type: string

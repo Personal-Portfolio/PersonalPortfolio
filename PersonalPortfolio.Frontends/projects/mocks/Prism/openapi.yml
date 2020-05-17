@@ -129,6 +129,26 @@ paths:
                   value:
                     code: RUR
                     description: Russian Ruble
+        '404':
+          description: Currency code does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Error'
+              examples:
+                Default:
+                  value:
+                    errors:
+                      - id: '1'
+                        status: Not found
+                        code: 404
+                        title: Currency code does not exist
+                        detail: "Currency 'HUF' is not available on this server"
       tags:
         - currency
     put:
@@ -142,6 +162,12 @@ paths:
       responses:
         '202':
           description: Successful response.
+        '404':
+          description: Currency code does not exist
+          content:
+            application/json:
+              schema:
+                type: string
       operationId: updateCurrency
       summary: Update a Currency
       description: Updates an existing `Currency`.
@@ -151,6 +177,12 @@ paths:
       responses:
         '204':
           description: Successful response.
+        '404':
+          description: Currency code does not exist
+          content:
+            application/json:
+              schema:
+                type: string
       operationId: deleteCurrency
       summary: Delete a Currency
       description: Deletes an existing `Currency`.
@@ -177,6 +209,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Security'
           description: Successful response - returns a single `Security`.
+        '404':
+          description: Security code does not exist
+          content:
+            application/json:
+              schema:
+                type: string
       operationId: getSecurity
       summary: Get a Security
       description: Gets the details of a single instance of a `Security`.
@@ -193,6 +231,12 @@ paths:
       responses:
         '202':
           description: Successful response.
+        '404':
+          description: Security code does not exist
+          content:
+            application/json:
+              schema:
+                type: string
       operationId: updateSecurity
       summary: Update a Security
       description: Updates an existing `Security`.
@@ -202,6 +246,12 @@ paths:
       responses:
         '204':
           description: Successful response.
+        '404':
+          description: Security code does not exist
+          content:
+            application/json:
+              schema:
+                type: string
       operationId: deleteSecurity
       summary: Delete a Security
       description: Deletes an existing `Security`.
@@ -214,6 +264,31 @@ paths:
           type: string
         in: path
         required: true
+  '/api/security-types/{type}':
+    parameters:
+      - schema:
+          type: string
+        name: type
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: Successful response - returns a single `Security Type`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityType'
+        '404':
+          description: Security Type code not exists
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: getSecurityType
+      description: Gets the details of a single instance of a `Security Type`.
 components:
   schemas:
     Currency:
@@ -222,6 +297,10 @@ components:
       $ref: ./Components/Security.yml
     SecurityType:
       $ref: ./Components/SecurityType.yml
+    Error:
+      $ref: ./Components/Error.yml
+    JsonApiResponse:
+      $ref: ./Components/JsonApiResponse.yml
 tags:
   - name: system-configuration-frontend
     description: Methods for system configuration app
@@ -230,4 +309,4 @@ tags:
   - name: security
     description: Methods related to securities
 servers:
-  - url: 'localhost:3000'
+  - url: 'localhost:4010'

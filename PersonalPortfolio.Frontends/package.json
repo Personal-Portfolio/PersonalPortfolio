@@ -5,13 +5,16 @@
   "scripts": {
     "ng": "ng",
     "ngcc": "ngcc",
+    "run-p": "run-p",
+    "prism": "prism",
     "start": "ng serve --open",
-    "start:prod": "npm run build:prod && npm run server",
     "build": "ng build",
     "build:prod": "ng build --prod",
-    "prism": "prism",
-    "mocker": "prism mock projects/mock-server/openapi.yml",
-    "prism:proxy": "prism proxy projects/mock-server/openapi.yml http://localhost:3000 --errors",
+    "prism:serve": "prism mock projects/mocks/Prism/openapi.yml",
+    "prism:proxy": "prism proxy projects/mocks/Prism/openapi.yml http://localhost:3000 --errors",
+    "mockserver": "node projects/mocks/MockServer/main.mjs",
+    "mockserver:verified": "run-p prism:proxy mockserver",
+    "start:prod": "npm run build:prod & npm run mockserver:verified",
     "lint": "ng lint",
     "test": "ng lint && ng test --configuration=test",
     "watch": "ng test --configuration=test --browsers ChromeHeadless --watch",
@@ -58,6 +61,7 @@
     "@angular/compiler-cli": "^9.1.0",
     "@angular/language-service": "^9.1.0",
     "@ngrx/schematics": "^9.0.0",
+    "@stoplight/prism-cli": "^3.3.2",
     "@types/jasmine": "~2.8.9",
     "@types/jasminewd2": "^2.0.5",
     "@types/node": "^12.11.1",
@@ -78,7 +82,8 @@
     "ts-node": "^8.6.2",
     "tslint": "^5.15.0",
     "typescript": "~3.8.3",
-    "@stoplight/prism-cli": "^3.3.2",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "webpack-bundle-analyzer": "^3.3.2",
+    "mockserver": "^3.1.1",
+    "npm-run-all": "^4.1.5"
   }
 }

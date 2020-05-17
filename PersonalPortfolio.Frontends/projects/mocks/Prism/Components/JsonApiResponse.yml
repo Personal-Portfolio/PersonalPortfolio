@@ -1,0 +1,8 @@
+title: Json Api Response
+description: Type for Json API response object
+type: object
+properties:
+  errors:
+    type: array
+    items:
+      $ref: ./Error.yml
