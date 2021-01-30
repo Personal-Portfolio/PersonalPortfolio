@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>97a548e3-2f5d-45f2-94c4-1d02f072015c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\PersonalPortfolio.DataProviders.Cbr\PersonalPortfolio.DataProviders.Cbr.csproj" />
+    <ProjectReference Include="..\PersonalPortfolio.TaxCalc.Client\PersonalPortfolio.TaxCalc.Client.csproj" />
+  </ItemGroup>
+
+
+</Project>

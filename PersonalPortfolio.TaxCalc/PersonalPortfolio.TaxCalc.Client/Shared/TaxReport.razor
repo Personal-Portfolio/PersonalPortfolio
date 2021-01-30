@@ -1,0 +1,62 @@
+﻿@using System.Globalization
+@using Fluxor
+@using PersonalPortfolio.TaxCalc.Client.Store.BrokerReportImport.States
+@using PersonalPortfolio.TaxCalc.Core
+
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@if (TaxationTradeReportItemState?.Value?.ReportItems.Count > 0)
+{
+    <h3>Here are your taxable trades:</h3>
+
+    <table class="table table-striped">
+        <thead>
+        <th scope="col">Symbol</th>
+        <th scope="col">Date bought</th>
+        <th scope="col">Date sold</th>
+        <th scope="col">Buy price</th>
+        <th scope="col">Buy price(tax)</th>
+        <th scope="col">Buy fee</th>
+        <th scope="col">Buy fee(tax)</th>
+        <th scope="col">Sell price</th>
+        <th scope="col">Sell price(tax)</th>
+        <th scope="col">Sell fee</th>
+        <th scope="col">Sell fee(tax)</th>
+        <th scope="col">Result</th>
+        <th scope="col">Result(tax)</th>
+        <th scope="col">Tax-to-pay</th>
+        </thead>
+        <tbody>
+            @foreach (var item in TaxationTradeReportItemState?.Value?.ReportItems)
+            {
+                var culture = item.Currency.ToCulture();
+
+                <tr key="item">
+                    <td>@item.AssetSymbol</td>
+                    <td>@item.AssetInputDate.ToString("d")</td>
+                    <td>@item.AssetOutputDate.ToString("d")</td>
+                    <td>@item.BuyPrice.ToString("C3", culture)</td>
+                    <td>@item.TaxationBuyPrice.ToString("C3", _taxCulture)</td>
+                    <td>@item.BuyFee.ToString("C3", culture)</td>
+                    <td>@item.TaxationBuyFee.ToString("C3", _taxCulture)</td>
+                    <td>@item.SellPrice.ToString("C3", culture)</td>
+                    <td>@item.TaxationSellPrice.ToString("C3", _taxCulture)</td>
+                    <td>@item.SellFee.ToString("C3", culture)</td>
+                    <td>@item.TaxationSellFee.ToString("C3", _taxCulture)</td>
+                    <td>@item.Result.ToString("C3", culture)</td>
+                    <td>@item.TaxationResult.ToString("C3", _taxCulture)</td>
+                    <td>@item.CalculatedTax.ToString("C3", _taxCulture)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    [Inject]
+    private IState<TaxationTradeReportItemState> TaxationTradeReportItemState { get; set; }
+
+    private readonly CultureInfo _taxCulture = Currency.Rub.ToCulture();
+}

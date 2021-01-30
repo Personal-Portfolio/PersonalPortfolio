@@ -1,0 +1,31 @@
+﻿<div class="form-group">
+    <div class="dropArea @_dropClass">
+        Drag and drop your file here or click to open file loading dialogue...
+        <InputFile id="inputDrop"
+                   OnChange="OnFileSelectionAsync"
+                   @ondragenter="HandleDragEnter"
+                   @ondragleave="HandleDragLeave"
+                   multiple />
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<IEnumerable<IBrowserFile>> OnChange { get; set; }
+
+    private string _dropClass = string.Empty;
+
+    private void HandleDragEnter()
+    {
+        _dropClass = "dropAreaDrug";
+    }
+
+    private void HandleDragLeave()
+    {
+        _dropClass = string.Empty;
+    }
+
+    private Task OnFileSelectionAsync(InputFileChangeEventArgs eventArgs) =>
+        OnChange.InvokeAsync(eventArgs.GetMultipleFiles());
+}

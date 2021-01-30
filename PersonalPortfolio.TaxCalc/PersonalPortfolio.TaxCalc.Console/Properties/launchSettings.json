@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PersonalPortfolio.TaxCalc.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "U3138423_trades.csv",
+      "workingDirectory": "C:\\Users\\epopodyanets.CS\\Downloads"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+﻿@page "/"
+@using Fluxor
+@using Microsoft.Extensions.Logging
+@using PersonalPortfolio.TaxCalc.Client.Store.BrokerReportImport.Actions
+@using PersonalPortfolio.TaxCalc.Client.Store.BrokerReportImport.States
+@using PersonalPortfolio.TaxCalc.Core
+@using System.Threading
+
+<div class="jumbotron">
+    <h1 class="display-4">Tax calculator</h1>
+    <p class="lead">Here is a calculator for your trades from a broker's CSV.</p>
+    <hr class="my-4">
+    @if (TradeItemState?.Value?.InputItems.Count > 0)
+    {
+        <div>
+            <button @onclick="ResetTradeReports" type="button" class="btn btn-secondary">
+                Reset reports
+            </button>
+        </div>
+        <div>
+            <TaxReport />
+        </div>
+    }
+    else
+    {
+        <FilePicker OnChange="OnFileSelection"></FilePicker>
+    }
+</div>
+
+@code{
+
+    [Inject]
+    public IBrokerReportParser BrokerReportParser { get; set; }
+
+    [Inject]
+    public ITaxReportGenerator TaxReportGenerator { get; set; }
+
+    [Inject]
+    private IState<TradeItemState> TradeItemState { get; set; }
+
+    [Inject]
+    private ILogger<Index> Logger  { get; set; }
+
+    [Inject]
+    public IDispatcher Dispatcher { get; set; }
+
+
+    private async Task OnFileSelection(IEnumerable<IBrowserFile> files)
+    {
+        Logger.LogInformation("Started reading CSV file.");
+
+        var reports = new List<TradeItem>();
+
+        foreach (var file in files)
+        {
+            await using var fileStream = file.OpenReadStream();
+
+            var report = await BrokerReportParser
+                .ParseReportAsync(fileStream, CancellationToken.None)
+                .ConfigureAwait(false);
+
+            reports.AddRange(report);
+        }
+
+        Logger.LogInformation("Finished reading CSV file(s).");
+        Logger.LogInformation($"Created {reports.Count} records.");
+
+        var action = new SetTradeReportAction(reports);
+        Dispatcher.Dispatch(action);
+    }
+
+    private void ResetTradeReports()
+    {
+        var action = new SetTradeReportAction(new List<TradeItem>());
+        Dispatcher.Dispatch(action);
+    }
+}

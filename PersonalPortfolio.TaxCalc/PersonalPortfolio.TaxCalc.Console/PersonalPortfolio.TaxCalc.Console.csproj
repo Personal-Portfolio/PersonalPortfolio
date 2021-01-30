@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <langversion>latest</langversion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\PersonalPortfolio.DataProviders.Cbr\PersonalPortfolio.DataProviders.Cbr.csproj" />
+    <ProjectReference Include="..\PersonalPortfolio.TaxCalc.BrokerParsing\PersonalPortfolio.TaxCalc.BrokerParsing.csproj" />
+    <ProjectReference Include="..\PersonalPortfolio.TaxCalc.Calculation\PersonalPortfolio.TaxCalc.Calculation.csproj" />
+  </ItemGroup>
+
+</Project>
