@@ -20,7 +20,7 @@ namespace PersonalPortfolio.TaxCalc.Client.Store.BrokerReportImport.Effects
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        protected override async Task HandleAsync(SetTradeReportAction trigger, IDispatcher dispatcher)
+        public override async Task HandleAsync(SetTradeReportAction trigger, IDispatcher dispatcher)
         {
             var list = new List<TaxationTradeReportItem>();
 
