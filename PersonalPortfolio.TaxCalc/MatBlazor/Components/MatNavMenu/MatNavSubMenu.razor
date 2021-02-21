@@ -1,0 +1,8 @@
+﻿@namespace MatBlazor
+@inherits BaseMatNavSubMenu
+
+<CascadingValue Value="@this">
+    <li class="@ClassMapper.AsString()" style="@StyleMapper.AsString()" @ref="Ref"  @attributes="Attributes" Id="@Id">        
+        @ChildContent
+    </li>
+</CascadingValue>

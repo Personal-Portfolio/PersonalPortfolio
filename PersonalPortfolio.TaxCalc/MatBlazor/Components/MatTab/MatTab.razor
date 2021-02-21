@@ -1,0 +1,7 @@
+﻿@namespace MatBlazor
+@using Microsoft.AspNetCore.Components
+@inherits BaseMatTab
+
+<CascadingValue Value="@this">
+    <MatTabLabel Class="@Class" Style="@StyleMapper.AsString()" Id="@Id" Attributes="@Attributes">@LabelContent</MatTabLabel>
+</CascadingValue>

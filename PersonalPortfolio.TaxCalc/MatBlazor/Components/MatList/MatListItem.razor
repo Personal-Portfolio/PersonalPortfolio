@@ -1,0 +1,15 @@
+﻿@namespace MatBlazor
+@inherits BaseMatListItem
+
+@if (Href == null || Disabled)
+{
+    <li class="@ClassMapper.AsString()" @onmousedown="OnMouseDown" @onclick="OnClick" style="@StyleMapper.AsString()" @ref="Ref"  @attributes="Attributes" Id="@Id">
+        @ChildContent
+    </li>
+}
+else
+{
+    <a class="@ClassMapper.AsString()" href="@Href" @onmousedown="OnMouseDown" @onclick="OnClick" style="@StyleMapper.AsString()" @ref="Ref"  @attributes="Attributes" Id="@Id">
+        @ChildContent
+    </a>
+}

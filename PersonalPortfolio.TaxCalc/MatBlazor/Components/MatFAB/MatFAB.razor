@@ -1,0 +1,15 @@
+﻿@namespace MatBlazor
+@inherits BaseMatFAB
+
+
+<button class="@ClassMapper.AsString()" style="@StyleMapper.AsString()" @onclick="OnClick" @ref="Ref"  @attributes="Attributes" Id="@Id">
+    @ChildContent
+    @if (Icon != null)
+    {
+        <span class="mdc-fab__icon material-icons">@Icon</span>
+    }
+    @if (Label != null)
+    {
+        <span class="mdc-fab__label">@Label</span>
+    }
+</button>

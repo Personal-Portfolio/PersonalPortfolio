@@ -1,0 +1,35 @@
+﻿@namespace MatBlazor
+@using Microsoft.AspNetCore.Components
+@inherits BaseMatTooltip
+
+@if (!Wrap)
+{
+    if (ChildContent != null)
+    {
+        @ChildContent(TargetForwardRef)
+    }
+}
+else
+{
+    <div class="mat-tooltip-wrapper" @ref="TargetForwardRef.Current" >
+        @if (ChildContent != null)
+        {
+            @ChildContent(TargetForwardRef)
+        }
+    </div>
+}
+
+<div class="@ClassMapper.AsString()" @ref="Ref"  style="@StyleMapper.AsString()" @attributes="Attributes" Id="@Id">
+    @if (TooltipContent != null)
+    {
+        @TooltipContent
+    }
+    else
+    {
+        @Tooltip
+    }
+</div>
+
+@code
+{
+}

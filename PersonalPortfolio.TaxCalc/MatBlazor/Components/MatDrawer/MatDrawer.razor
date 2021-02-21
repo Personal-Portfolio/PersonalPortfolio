@@ -1,0 +1,13 @@
+﻿@namespace MatBlazor
+@inherits BaseMatDrawer
+
+<aside class="@ClassMapper.AsString()" style="@StyleMapper.AsString()" @ref="Ref"  @attributes="Attributes" Id="@Id">
+    <div class="mdc-drawer__content" tabindex="@ContentTabIndex">
+        @ChildContent
+    </div>
+</aside>
+
+@if (Mode == MatDrawerMode.Modal)
+{
+    <div class="mdc-drawer-scrim"></div>
+}

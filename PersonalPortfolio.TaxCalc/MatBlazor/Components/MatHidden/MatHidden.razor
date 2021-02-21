@@ -1,0 +1,27 @@
+﻿@namespace MatBlazor
+@inherits BaseMatHidden
+
+@if (Hidden.HasValue)
+{
+    if (Hidden.Value)
+    {
+        if (ElseContent != null)
+        {
+            @ElseContent
+        }
+    }
+    else
+    {
+        if (ChildContent != null)
+        {
+            @ChildContent
+        }
+    }
+}
+else
+{
+    if (InitContent != null)
+    {
+        @InitContent
+    }
+}

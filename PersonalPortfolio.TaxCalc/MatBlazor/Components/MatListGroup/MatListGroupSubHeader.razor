@@ -1,0 +1,13 @@
+﻿@namespace MatBlazor
+@using Microsoft.AspNetCore.Components
+@inherits BaseMatDomComponent
+
+<h3 class="@ClassMapper.AsString() mdc-list-group__subheader" style="@StyleMapper.AsString()" @ref="Ref"  @attributes="Attributes" Id="@Id">@ChildContent</h3>
+
+@code
+{
+
+    [Parameter]
+    public  RenderFragment ChildContent { get; set; }
+
+}

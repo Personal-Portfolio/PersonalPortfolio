@@ -1,0 +1,34 @@
+﻿@namespace MatBlazor
+@inherits BaseMatToastItem
+@Css
+
+<MatRipple Class="@Class" style="@StyleMapper.AsString()" Id="@Id" Attributes="@Attributes" RefBack="@RefBack">
+    @* @onmouseenter="(()=>MouseEnter())" @onmouseleave="(()=>MouseLeave())"  *@
+    <div class="@ContainerClassMapper.AsString()" style="@AnimationStyle" @onclick="(_=>Clicked(_))">
+        <div class="mat-toast-message">
+            @if (ShowProgressBar)
+            {
+                <div class="mat-toast-progress" style="@ProgressBarStyle"></div>
+            }
+            @if (!string.IsNullOrEmpty(Toast.Icon))
+            {
+                <MatIcon Class="mat-toast-icon" Icon="@Toast.Icon"></MatIcon>
+            }
+            @if (Toast.Options.ShowCloseButton)
+            {
+                <MatIconButton Icon="@Toast.Options.CloseIcon" Class="mat-toast-close-button" OnMouseDown="@CloseIconClicked"></MatIconButton>
+            }
+            @if (!string.IsNullOrEmpty(Message))
+            {
+                <div class="mat-toast-body">
+
+                    @if (!string.IsNullOrEmpty(Title))
+                    {
+                        <span class="mat-toast-title">@Title</span>
+                    }
+                    @Message
+                </div>
+            }
+        </div>
+    </div>
+</MatRipple>
