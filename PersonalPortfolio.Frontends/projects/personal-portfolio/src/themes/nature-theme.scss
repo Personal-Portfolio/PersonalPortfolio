@@ -1,0 +1,9 @@
+$personal-portfolio-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$personal-portfolio-nature-accent: mat-palette($mat-deep-purple, 300);
+$personal-portfolio-nature-warn: mat-palette($mat-red, 600);
+
+$personal-portfolio-nature-theme: mat-light-theme(
+  $personal-portfolio-nature-primary,
+  $personal-portfolio-nature-accent,
+  $personal-portfolio-nature-warn
+);

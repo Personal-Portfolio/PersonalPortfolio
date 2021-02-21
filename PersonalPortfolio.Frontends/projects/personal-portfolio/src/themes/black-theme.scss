@@ -1,0 +1,9 @@
+$personal-portfolio-black-primary: mat-palette($mat-blue-grey, 400);
+$personal-portfolio-black-accent: mat-palette($mat-orange, 700, 400, 600);
+$personal-portfolio-black-warn: mat-palette($mat-red, 800);
+
+$personal-portfolio-black-theme: mat-dark-theme(
+  $personal-portfolio-black-primary,
+  $personal-portfolio-black-accent,
+  $personal-portfolio-black-warn
+);

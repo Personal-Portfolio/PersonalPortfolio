@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+
+{
+    "code": "USD",
+    "description": "United States dollar"
+}

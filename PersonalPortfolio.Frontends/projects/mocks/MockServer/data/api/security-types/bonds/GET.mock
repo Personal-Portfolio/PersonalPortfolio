@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+
+{
+    "code": "bonds",
+    "description": "Instruments of indebtedness of the bond issuer to the holders.\nThe most common types of bonds include municipal bonds and corporate bonds. \n",
+    "type": "Bonds",
+    "category": "Debt"
+}

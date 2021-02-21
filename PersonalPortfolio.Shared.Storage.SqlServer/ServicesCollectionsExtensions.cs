@@ -1,21 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalPortfolio.Shared.Core;
 using PersonalPortfolio.Shared.Storage.Abstractions;
+using PersonalPortfolio.Shared.Storage.Commands;
 using PersonalPortfolio.Shared.Storage.Projections;
 using PersonalPortfolio.Shared.Storage.Queries;
-using PersonalPortfolio.Shared.Storage.SqlServer.Configurations;
+using PersonalPortfolio.Shared.Storage.SqlServer.Configuration.Model;
 
 namespace PersonalPortfolio.Shared.Storage.SqlServer
 {
     public static class ServicesCollectionsExtensions
     {
-        public static IServiceCollection AddPortfolioSqlStorageServices(this IServiceCollection services)
+        public static IServiceCollection AddPortfolioSqlStorageServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IContextModelConfigurator, ContextModelConfigurator>();
-            services.AddTransient<IContextFactory<PortfolioDbContext>, PortfolioDbContextFactory>();
-            services.AddTransient<IMapper<Security, SecurityInfo>, SecurityInfoMapper>();
-            services.AddTransient<ISecurityQueryService, SecurityQueryService>();
+            services
+                .AddTransient<IContextModelConfigurator, ContextModelConfigurator>()
+                .AddTransient<IBulkCommandsService, BulkCommandsService<PortfolioDbContext>>()
+                .AddTransient<IMapper<Security, SecurityInfo>, SecurityInfoMapper>()
+                .AddTransient<ISecurityQueryService, SecurityQueryService>()
+                .AddTransient<IMapper<Currency, CurrencyInfo>, CurrencyInfoMapper>()
+                .AddTransient<ICurrencyQueryService, CurrencyQueryService>()
+                .AddTransient<ICurrencyCommandService, CurrencyCommandService>()
+                .AddDbContext<PortfolioDbContext>(
+                    options =>
+                    {
+                        var connectionString = configuration.GetConnectionString(Constants.ConnectionStringName)
+                                               ?? throw new ArgumentNullException(nameof(configuration),
+                                                   $"Connection string with name {Constants.ConnectionStringName} not found.");
+                        options.UseSqlServer(connectionString,
+                            o => o.MigrationsAssembly(typeof(Constants).Assembly.FullName));
+                    }, ServiceLifetime.Transient);
 
             return services;
         }

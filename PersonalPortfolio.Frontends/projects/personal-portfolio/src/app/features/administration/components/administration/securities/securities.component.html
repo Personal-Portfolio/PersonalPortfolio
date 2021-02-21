@@ -1,0 +1,139 @@
+<div class="container" rtl>
+    <h1>{{ 'personal-portfolio.administration.security.title' | translate }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{{ 'personal-portfolio.administration.security.list-subtitle' | translate }}</h2>
+            <mat-card *ngFor="let security of securities$ | async" [ngClass]="routeAnimationsElements"
+                (click)=select(security)>
+                <h3>{{security.id}}</h3>
+            </mat-card>
+            <p *ngIf="(securities$ | async)?.length === 0">
+                {{'personal-portfolio.administration.security.empty' | translate}}
+            </p>
+            <button type="button" mat-fab color="accent" class="add" [ngClass]="routeAnimationsElements"
+                *ngIf="!isEditing" (click)="addNew(securityForm)">
+                <fa-icon icon="plus"></fa-icon>
+            </button>
+        </div>
+        <div class="col-md-6">
+            <span class="d-flex justify-content-between">
+                <h2>{{ 'personal-portfolio.administration.security.edit-subtitle' | translate }}</h2>
+                <span class="d-flex justify-content-end">
+                    <span *ngIf="selectedSecurity$ | async as selectedSecurity">
+                        <button mat-icon-button color="accent" *ngIf="!isEditing">
+                            <fa-icon icon="edit" (click)="edit(selectedSecurity)"
+                                [matTooltip]="'personal-portfolio.administration.security.tooltip.edit' | translate"
+                                matTooltipPosition="above">
+                            </fa-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="delete(selectedSecurity)">
+                            <fa-icon icon="trash"
+                                [matTooltip]="'personal-portfolio.administration.security.tooltip.delete' | translate"
+                                matTooltipPosition="above">
+                            </fa-icon>
+                        </button>
+                        <button mat-icon-button (click)="deselect()">
+                            <fa-icon icon="times"
+                                [matTooltip]="'personal-portfolio.administration.security.tooltip.deselect' | translate"
+                                matTooltipPosition="above">
+                            </fa-icon>
+                        </button>
+                    </span>
+                </span>
+            </span>
+            <form #securityForm="ngForm" [formGroup]="securityFormGroup" [style.display]="isEditing ? 'block' : 'none'"
+                [ngClass]="routeAnimationsElements">
+                <div class="row">
+                    <mat-form-field class="col">
+                        <input matInput
+                            placeholder="{{ 'personal-portfolio.administration.security.code-placeholder' | translate }}"
+                            formControlName="id" required autofocus />
+                        <mat-error *ngIf="securityFormGroup.get('id').invalid">
+                            {{ 'personal-portfolio.administration.security.code-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col">
+                        <mat-select formControlName="type"
+                            placeholder="{{ 'personal-portfolio.administration.security.type-placeholder' | translate }}"
+                            required>
+                            <mat-option *ngFor="let type of securityTypes$ | async" [value]="type.id">
+                                {{type.type}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="securityFormGroup.get('type').invalid">
+                            {{ 'personal-portfolio.administration.security.type-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col">
+                        <mat-select formControlName="currency"
+                            placeholder="{{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}"
+                            required>
+                            <mat-option *ngFor="let currency of currencies$ | async" [value]="currency.id">
+                                {{currency.id}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="securityFormGroup.get('currency').invalid">
+                            {{ 'personal-portfolio.administration.security.currency-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col">
+                        <textarea matInput
+                            placeholder="{{ 'personal-portfolio.administration.security.description-placeholder' | translate }}"
+                            formControlName="description" rows="5"></textarea>
+                        <mat-error *ngIf="securityFormGroup.get('description').invalid">
+                            {{ 'personal-portfolio.administration.security.description-placeholder' | translate }}
+                            {{ 'personal-portfolio.administration.security.error' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-between">
+                        <button (click)="save()" mat-raised-button color="primary">
+                            {{'personal-portfolio.administration.security.save' | translate }}
+                        </button>
+                        <button (click)="cancelEditing()" mat-raised-button>
+                            {{'personal-portfolio.administration.security.cancel' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <ng-container *ngIf="!isEditing">
+                <div [ngClass]="routeAnimationsElements"
+                    *ngIf="selectedSecurity$ | async as selectedSecurity; else noselectedSecurityTmpl">
+                    <mat-card>
+                        <mat-card-title>
+                            {{ selectedSecurity.id }}
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <mat-chip-list aria-label="Security classification">
+                                <mat-chip color="primary" selected [matTooltip]="((securityTypeSelection$ | async)(selectedSecurity.type)).description">
+                                    {{ ((securityTypeSelection$ | async)(selectedSecurity.type)).type}}
+                                </mat-chip>
+                                <mat-chip color="accent" selected [matTooltip]="((currencySelection$ | async)(selectedSecurity.currency)).description">
+                                    {{ selectedSecurity.currency }} 
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-card-subtitle>
+                        <mat-card-content>
+                            {{ selectedSecurity.description }}
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <ng-template #noselectedSecurityTmpl>
+                    <p [ngClass]="routeAnimationsElements">
+                        {{'personal-portfolio.administration.security.edit-text' | translate }}
+                    </p>
+                </ng-template>
+            </ng-container>
+        </div>
+    </div>
+</div>

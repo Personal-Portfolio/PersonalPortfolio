@@ -1,0 +1,15 @@
+HTTP/1.1 404 Not Found
+Connection: keep-alive
+Content-Type: application/json
+
+{
+    "errors": [
+        {
+            "id": 1,
+            "status": "Not found",
+            "code": 404,
+            "title": "Currency code does not exist",
+            "detail": "Currency 'HUF' is not available on this server"
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+<div class="container" rtl>
+    <div class="row">
+        <h1>{{ 'personal-portfolio.administration.currency.title' | translate }}</h1>
+    </div>
+    <div class="row">
+        <h2>{{ 'personal-portfolio.administration.currency.list-subtitle' | translate }}</h2>
+
+        <!-- Header column -->
+        <table mat-table [dataSource]="currenciesDataSource" class="mat-elevation-z8" multiTemplateDataRows>
+            <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnDefinitions">
+                <th mat-header-cell *matHeaderCellDef> {{column.header | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column.id]}} </td>
+            </ng-container>
+
+            <!-- Disclaimer column -->
+            <ng-container matColumnDef="disclaimer">
+                <td mat-header-cell *matHeaderCellDef [attr.colspan]="columnDefinitions.length">
+                    <div class="details-cell-area">
+                        <span>
+                            {{'personal-portfolio.administration.currency.empty' | translate}}
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Expandable column -->
+            <ng-container matColumnDef="expandedDetail">
+                <td *matCellDef="let element" [attr.colspan]="columnDefinitions.length">
+                    <div class="details-cell-area"
+                        [@detailExpand]="(selectedCurrency$ | async) === element ? 'expanded' : 'collapsed'">
+                        <form #currencyForm="ngForm" [formGroup]="editCurrencyFormGroup"
+                            [ngClass]="routeAnimationsElements">
+                            <span class="d-flex justify-content-between align-items-baseline">
+                                <mat-form-field class="col" appearance="outline">
+                                    <mat-label>
+                                        {{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}
+                                    </mat-label>
+                                    <input matInput
+                                        placeholder="{{ 'personal-portfolio.administration.currency.description-placeholder' | translate }}"
+                                        formControlName="description" required>
+                                    <mat-error *ngIf="editCurrencyFormGroup.get('description').invalid">
+                                        {{ 'personal-portfolio.administration.currency.description-header' | translate }}
+                                        {{ 'personal-portfolio.administration.currency.error' | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <button mat-icon-button color="accent" (click)="save()"
+                                    [ngClass]="routeAnimationsElements">
+                                    <fa-icon icon="save"
+                                        [matTooltip]="'personal-portfolio.administration.currency.save' | translate"
+                                        matTooltipPosition="above">
+                                    </fa-icon>
+                                </button>
+                                <button mat-icon-button color="warn" (click)="delete(element)"
+                                    [ngClass]="routeAnimationsElements">
+                                    <fa-icon icon="trash"
+                                        [matTooltip]="'personal-portfolio.administration.currency.tooltip.delete' | translate"
+                                        matTooltipPosition="above">
+                                    </fa-icon>
+                                </button>
+                            </span>
+                        </form>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Footer column - add new -->
+            <ng-container matColumnDef="expandedNew">
+                <td mat-footer-cell *matFooterCellDef [attr.colspan]="columnDefinitions.length">
+                    <form #currencyNewForm="ngForm" [formGroup]="addCurrencyFormGroup"
+                        [ngClass]="routeAnimationsElements">
+                        <span class="d-flex justify-content-between align-items-baseline">
+                            <mat-form-field *ngFor="let column of columnDefinitions" class="col"
+                                [ngClass]="routeAnimationsElements">
+                                <input matInput placeholder="{{ column.placeholderKey | translate }}"
+                                    formControlName="{{ column.id }}" required>
+                                <mat-error *ngIf="addCurrencyFormGroup.get(column.id).invalid">
+                                    {{ column.header | translate }}
+                                    {{ 'personal-portfolio.administration.currency.error' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                            <button mat-icon-button color="accent" (click)="create(currencyNewForm)"
+                                [ngClass]="routeAnimationsElements">
+                                <fa-icon icon="plus"
+                                    [matTooltip]="'personal-portfolio.administration.currency.save' | translate"
+                                    matTooltipPosition="above">
+                                </fa-icon>
+                            </button>
+                        </span>
+                    </form>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="(currencies$ | async)?.length === 0 ? ['disclaimer'] : columns"></tr>
+            <tr mat-row *matRowDef="let element; columns: columns" class="item-row" (click)="onRowClick(element)"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            <tr mat-footer-row *matFooterRowDef="['expandedNew']; sticky: true" class="new-item-row"></tr>
+        </table>
+    </div>
+</div>

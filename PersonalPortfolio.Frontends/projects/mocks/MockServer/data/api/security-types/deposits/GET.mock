@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+
+{
+    "code": "deposits",
+    "description": "Bank deposits",
+    "type": "Bank deposits",
+    "category": "Fixed income"
+}

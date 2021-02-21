@@ -1,0 +1,12 @@
+title: Security Type
+description: 'Type for Security Type objects'
+type: object
+properties:
+  description:
+    type: string
+  code:
+    type: string
+  type:
+    type: string
+  category:
+    type: string

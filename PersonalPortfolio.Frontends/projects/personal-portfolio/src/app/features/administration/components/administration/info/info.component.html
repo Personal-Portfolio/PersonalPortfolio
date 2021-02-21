@@ -1,0 +1,64 @@
+<div class="container" rtl>
+    <h1>{{ 'personal-portfolio.administration.info.title' | translate }}</h1>
+
+    <mat-accordion [multi]="true" [ngClass]="routeAnimationsElements">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    General info
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <mat-form-field>
+                    <mat-label>
+                        First name
+                    </mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input matInput type="number" min="1">
+                </mat-form-field>
+                <mat-action-row>
+                    <button mat-icon-button color="accent">
+                        <fa-icon [icon]="['fas','sync-alt']"></fa-icon>
+                    </button>
+                </mat-action-row>
+            </ng-template>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Security types available
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <mat-card>
+                    <table mat-table [dataSource]="securityTypesDataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="type">
+                            <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.type}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="category">
+                            <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.category}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="description">
+                            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                            <mat-cell *matCellDef="let type"> {{type.description}} </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row >
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </table>
+                </mat-card>
+
+                <mat-action-row>
+                    <button mat-icon-button color="accent">
+                        <fa-icon [icon]="['fas','sync-alt']"></fa-icon>
+                    </button>
+                </mat-action-row>
+            </ng-template>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

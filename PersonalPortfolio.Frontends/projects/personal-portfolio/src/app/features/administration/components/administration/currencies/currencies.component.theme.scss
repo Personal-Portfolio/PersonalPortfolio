@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+@mixin personal-portfolio-admin-currencies-component-theme($theme) {
+  $accent: map-get($theme, accent);
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+
+  personal-portfolio-currencies {
+      tr {
+          
+    &.new-item-row {
+        border-top-color: mat-color($foreground, divider);
+    }
+    
+    &.item-row {
+        &:hover {
+            background: mat-color($accent);
+          }
+      
+          &:active {
+            background: mat-color($accent);
+          }
+        }
+      }
+  }
+}

@@ -34,7 +34,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(2)")
-                        .HasDefaultValueSql("sysdatetime()");
+                        .HasDefaultValueSql("sysutcdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");
@@ -70,7 +70,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(2)")
-                        .HasDefaultValueSql("sysdatetime()");
+                        .HasDefaultValueSql("sysutcdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");
@@ -82,7 +82,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.HasKey("Id");
 
@@ -110,7 +110,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(2)")
-                        .HasDefaultValueSql("sysdatetime()");
+                        .HasDefaultValueSql("sysutcdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");
@@ -150,10 +150,10 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Average")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.Property<decimal>("Close")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
@@ -161,19 +161,19 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(2)")
-                        .HasDefaultValueSql("sysdatetime()");
+                        .HasDefaultValueSql("sysutcdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");
 
                     b.Property<decimal>("High")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.Property<decimal>("Low")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.Property<decimal>("Open")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(9,5)");
 
                     b.Property<int>("SecurityId")
                         .HasColumnType("int");
@@ -204,7 +204,7 @@ namespace PersonalPortfolio.Shared.Storage.SqlServer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2(2)")
-                        .HasDefaultValueSql("sysdatetime()");
+                        .HasDefaultValueSql("sysutcdatetime()");
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2(2)");

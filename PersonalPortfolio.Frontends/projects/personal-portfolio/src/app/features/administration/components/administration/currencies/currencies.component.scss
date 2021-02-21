@@ -1,0 +1,49 @@
+ 
+  h1 {
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+  }
+   
+  .add {
+    margin: 20px auto 0;
+    display: block;
+  }
+  
+  table {
+    width: 100%;  
+  }
+  
+  tr {
+    &.detail-row {
+      height: 0;
+    }
+
+    &.new-item-row {
+        height: auto;
+        border-top: 1px solid;
+
+        td {
+            padding: 10px;
+        }
+    }
+  
+    &.item-row {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .item-row td {
+    border-bottom-width: 0;
+  }
+  
+  .details-cell-area {
+    overflow: hidden;
+    margin: 5px 20px;
+    span {
+        width: 100%;
+        margin: 10px;
+    }
+  }
+  

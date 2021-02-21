@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+
+[
+    {
+        "code": "bonds",
+        "description": "Instruments of indebtedness of the bond issuer to the holders.
+        \nThe most common types of bonds include municipal bonds and corporate bonds.",
+        "type": "Bonds",
+        "category": "Debt"
+    },
+    {
+        "code": "equities",
+        "description": "Stocks",
+        "type": "Stocks or Equities",
+        "category": "Equity"
+    },
+    {
+        "code": "deposits",
+        "description": "Bank deposits",
+        "type": "Bank deposits",
+        "category": "Fixed income"
+    }
+]

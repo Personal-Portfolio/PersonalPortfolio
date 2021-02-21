@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PersonalPortfolio.Shared.Storage;
+using PersonalPortfolio.Shared.Core;
 using PersonalPortfolio.Shared.Storage.Abstractions;
 
 namespace PersonalPortfolio.RatesLoader
@@ -13,19 +13,22 @@ namespace PersonalPortfolio.RatesLoader
     {
         private readonly IHostApplicationLifetime _applicationLifetime;
         private readonly ILogger<LoaderHostedService> _logger;
-        private readonly IContextFactory<PortfolioDbContext> _contextFactory;
-        private readonly ISecurityQueryService _queryService;
+        private readonly ICurrencyInfoService _currencyInfoProvider;
+        private readonly ICurrencyCommandService _currencyCommandService;
+        private readonly ICurrencyQueryService _queryService;
 
         public LoaderHostedService(
             IHostApplicationLifetime applicationLifetime,
             ILogger<LoaderHostedService> logger,
-            IContextFactory<PortfolioDbContext> contextFactory,
-            ISecurityQueryService queryService)
+            ICurrencyInfoService currencyInfoProvider,
+            ICurrencyCommandService currencyCommandService,
+            ICurrencyQueryService queryService)
         {
             _applicationLifetime = applicationLifetime
                                    ?? throw new ArgumentNullException(nameof(applicationLifetime));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
+            _currencyInfoProvider = currencyInfoProvider ?? throw new ArgumentNullException(nameof(currencyInfoProvider));
+            _currencyCommandService = currencyCommandService ?? throw new ArgumentNullException(nameof(currencyCommandService));
             _queryService = queryService ?? throw new ArgumentNullException(nameof(queryService));
         }
 
@@ -35,24 +38,26 @@ namespace PersonalPortfolio.RatesLoader
             {
                 _logger.LogDebug("Background service started.");
 
-                await using (var ctx = _contextFactory.CreateDbContext())
-                {
-                    await ctx.Database.MigrateAsync(stoppingToken).ConfigureAwait(false);
-                }
+                _logger.LogDebug("Get supported currencies.");
 
-                var test = await _queryService.GetAllSecurityInfos(stoppingToken).ConfigureAwait(false);
+                var registeredCurrencies = await _queryService.GetRegisteredCurrenciesAsync(stoppingToken)
+                    .ConfigureAwait(false);
 
-                foreach (var info in test)
-                {
-                    _logger.LogInformation($"Loaded security {info.Code} of type {info.Type} and with base currency {info.BaseCurrency.Code}");
-                }
+                var registeredCurrenciesCodes = registeredCurrencies.Select(s => s.Code).ToList();
+
+                _logger.LogInformation("Load rates for list of currencies: {0}", registeredCurrenciesCodes);
+
+                var rates = await _currencyInfoProvider.GetHistoricalRatesForCurrencyList(registeredCurrenciesCodes, stoppingToken)
+                    .ConfigureAwait(false);
+                var updates = await _currencyCommandService.AddRatesAsync(rates, stoppingToken);
 
                 _logger.LogDebug("Command execution finished.");
+                //_applicationLifetime.StopApplication();
             }
             catch (Exception e)
             {
                 _logger.LogCritical(e.ToString());
-                _applicationLifetime.StopApplication();
+                //_applicationLifetime.StopApplication();
             }
         }
     }

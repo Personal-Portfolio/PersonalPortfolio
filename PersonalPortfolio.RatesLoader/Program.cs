@@ -1,10 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PersonalPortfolio.DataProviders.EuroFx;
+using PersonalPortfolio.Shared.Core;
 using PersonalPortfolio.Shared.Storage.SqlServer;
+using PersonalPortfolio.Shared.Storage.SqlServer.Configuration;
+using Polly;
+using Polly.Extensions.Http;
 using Serilog;
 
 namespace PersonalPortfolio.RatesLoader
@@ -30,16 +37,27 @@ namespace PersonalPortfolio.RatesLoader
                 .ConfigureServices((hostingContext, services) =>
                     {
                         services
-                            .AddPortfolioSqlStorageServices()
+                            .AddPortfolioSqlStorageServices(hostingContext.Configuration)
+                            .Configure<BulkConfiguration>(hostingContext.Configuration.GetSection("StorageConfiguration:BulkConfiguration"))
                             .AddHostedService<LoaderHostedService>();
+
+                        services
+                            .AddHttpClient<ICurrencyInfoService, CurrencyInfoService>(
+                                client =>
+                                {
+                                    client.BaseAddress = new Uri("https://www.ecb.europa.eu");
+                                })
+                            .AddPolicyHandler(RetryPolicy)
+                            .SetHandlerLifetime(TimeSpan.FromMinutes(5));
                     });
 
             await builder.RunConsoleAsync();
         }
 
-        // EF Core uses this method at design time to access the DbContext
-        public static IHostBuilder CreateHostBuilder(string[] args)
-            => new HostBuilder()
-                .ConfigureServices(services => services.AddDesignTimeDbContext());
+        private static IAsyncPolicy<HttpResponseMessage> RetryPolicy =>
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
+                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
     }
 }

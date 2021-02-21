@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+
+{
+    "code": "equities",
+    "description": "Stocks",
+    "type": "Stocks or Equities",
+    "category": "Equity"
+}
