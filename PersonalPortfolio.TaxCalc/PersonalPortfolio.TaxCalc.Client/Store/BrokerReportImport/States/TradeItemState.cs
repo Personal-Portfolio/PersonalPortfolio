@@ -3,7 +3,7 @@ using PersonalPortfolio.TaxCalc.Core;
 
 namespace PersonalPortfolio.TaxCalc.Client.Store.BrokerReportImport.States
 {
-    internal class TradeItemState
+    public class TradeItemState
     {
         public TradeItemState(List<TradeItem> inputItems)
         {

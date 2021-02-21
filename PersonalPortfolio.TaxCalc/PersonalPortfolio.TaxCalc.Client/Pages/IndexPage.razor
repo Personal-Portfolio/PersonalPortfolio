@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<div class="jumbotron">
+    <h1 class="display-4">Tax calculator</h1>
+    <p class="lead">Here is a calculator for your trades from a broker's CSV.</p>
+    <hr class="my-4">
+    @if (_tradeItemState?.Value?.InputItems.Count > 0)
+    {
+        <div>
+            <button @onclick="ResetTradeReports" type="button" class="btn btn-secondary">
+                Reset reports
+            </button>
+        </div>
+        <div>
+            <TaxReport />
+        </div>
+    }
+    else
+    {
+        <FilePicker OnChange="OnFileSelection"></FilePicker>
+    }
+</div>

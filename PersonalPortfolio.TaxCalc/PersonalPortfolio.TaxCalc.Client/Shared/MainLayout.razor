@@ -1,13 +1,54 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<MatAppBarContainer>
+    <MatAppBar Fixed="true">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton Icon="menu" OnClick="@(e => ButtonClicked())"/>
+                <MatAppBarTitle>Personal Portfolio - Tax calculator</MatAppBarTitle>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
+    <MatAppBarContent>
+        <MatDrawerContainer Style="width: 100vw; height: 100vh;">
+            <MatDrawer @bind-Opened="@_opened">
+                <MatNavMenu>
+                    <MatRipple>
+                        <MatNavItem Href="/">
+                            <MatIcon Icon="home"/>
+                            &nbsp;Home
+                        </MatNavItem>
+                    </MatRipple>
+                    <MatNavItem Href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple" Target="_blank">
+                        <MatRipple Color="@MatRippleColor.Primary">
+                            <MatIcon Icon="extension" />
+                            &nbsp;MDC Components
+                        </MatRipple>
+                    </MatNavItem>
+                    <MatNavItem Href="https://www.matblazor.com/" Target="_blank">
+                        <MatRipple Color="@MatRippleColor.Secondary">
+                            <MatIcon Icon="extension" />
+                            &nbsp;MatBlazor
+                        </MatRipple>
+                    </MatNavItem>
+                </MatNavMenu>
+            </MatDrawer>
+            <MatDrawerContent>
+                @Body
+            </MatDrawerContent>
+        </MatDrawerContainer>
+    </MatAppBarContent>
+</MatAppBarContainer>
 
-    <div class="main">
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
+
+
+@code
+{
+    private bool _opened = true;
+
+    void ButtonClicked()
+    {
+        _opened = !_opened;
+    }
+
+}

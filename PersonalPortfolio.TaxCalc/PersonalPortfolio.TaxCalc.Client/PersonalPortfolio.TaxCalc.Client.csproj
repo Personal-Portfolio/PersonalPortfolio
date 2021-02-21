@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MatBlazor\MatBlazor.csproj" />
     <ProjectReference Include="..\PersonalPortfolio.TaxCalc.BrokerParsing\PersonalPortfolio.TaxCalc.BrokerParsing.csproj" />
     <ProjectReference Include="..\PersonalPortfolio.TaxCalc.Calculation\PersonalPortfolio.TaxCalc.Calculation.csproj" />
   </ItemGroup>
