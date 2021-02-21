@@ -141,7 +141,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Error'
               examples:
-                Default:
+                HUF:
                   value:
                     errors:
                       - id: '1'
@@ -151,7 +151,7 @@ paths:
                         detail: "Currency 'HUF' is not available on this server"
       tags:
         - currency
-    put:
+    patch:
       requestBody:
         description: Updated `Currency` information.
         content:
@@ -160,14 +160,52 @@ paths:
               $ref: '#/components/schemas/Currency'
         required: true
       responses:
-        '202':
-          description: Successful response.
+        '200':
+          description: Successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+        '400':
+          description: Currency code does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Error'
+              examples:
+                HUF:
+                  value:
+                    errors:
+                      - id: '1'
+                        status: Bad request
+                        code: 400
+                        title: Invalid currency model
+                        detail: "Provided JSON is not a correct currency"
         '404':
           description: Currency code does not exist
           content:
             application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Error'
+              examples:
+                HUF:
+                  value:
+                    errors:
+                      - id: '1'
+                        status: Not found
+                        code: 404
+                        title: Currency code does not exist
+                        detail: "Currency 'HUF' is not available on this server"
       operationId: updateCurrency
       summary: Update a Currency
       description: Updates an existing `Currency`.
