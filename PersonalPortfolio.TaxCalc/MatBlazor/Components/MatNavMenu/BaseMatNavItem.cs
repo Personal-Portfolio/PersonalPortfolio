@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MatBlazor
 {
@@ -45,13 +45,13 @@ namespace MatBlazor
         /// *Not yet functional - Target of Href when clicked.
         /// </summary>
         [Parameter]
-        public string Target { get; set; } = null;
+        public string Target { get; set; }
 
         /// <summary>
         /// The title shown.
         /// </summary>
         [Parameter]
-        public string Title { get; set; } = null;
+        public string Title { get; set; }
 
         /// <summary>
         ///  NavLinkMatch parameter used to determine the active state of the Nav Item.
@@ -70,23 +70,23 @@ namespace MatBlazor
 
         public async Task ToggleSelectedAsync()
         {
-            this.Selected = !this.Selected;
+            Selected = !Selected;
 
-            await SelectedChanged.InvokeAsync(this.Selected);
+            await SelectedChanged.InvokeAsync(Selected);
 
             if (MatNavMenu != null)
             {
-                await this.MatNavMenu.ToggleSelectedAsync(this, MatNavSubMenu);
+                await MatNavMenu.ToggleSelectedAsync(this, MatNavSubMenu);
             }
 
-            this.StateHasChanged();
+            StateHasChanged();
         }
 
         public BaseMatNavItem()
         {
             ClassMapper
                 .Add("mdc-nav-item")
-                .If("mdc-list-item--selected", () => (Selected && AllowSelection));
+                .If("mdc-list-item--activated", () => (Selected && AllowSelection));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace MatBlazor
 
             if (AllowSelection)
             {
-                await this.ToggleSelectedAsync();
+                await ToggleSelectedAsync();
             }
 
             if (Href != null)

@@ -2,7 +2,7 @@ import {MDCDrawer} from '@material/drawer/index';
 
 
 export function init(ref, component) {
-  ref.matBlazorRef = new MDCDrawer(ref);
+  ref.matBlazorRef = MDCDrawer.attachTo(ref);
   ref.addEventListener('MDCDrawer:closed', () => {
     component.invokeMethodAsync('ClosedHandler');
   });

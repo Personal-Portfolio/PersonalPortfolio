@@ -1,9 +1,11 @@
 @use "@material/drawer";
 @use "@material/theme";
+@use "@material/list";
 
 @include drawer.core-styles;
 @include drawer.dismissible-core-styles;
 @include drawer.modal-core-styles;
+@include list.core-styles;
 
 .mat-drawer-app-content {
   height: 100%;
@@ -13,5 +15,7 @@
 .mat-drawer {
   border-right-width: 0px;
   @include drawer.width(var(--mat-drawer-custom-width, 256px));
-  @include drawer.surface-fill-color(theme.$surface)
+  @include drawer.surface-fill-color(theme.$surface);
+  @include drawer.activated-overlay-color(theme.$secondary);
+
 }

@@ -43,7 +43,7 @@ namespace MatBlazor
         [Parameter]
         public EventCallback<bool> OpenedChanged { get; set; }
 
-        private DotNetObjectReference<BaseMatDrawer> dotNetObjectRef;
+        private DotNetObjectReference<BaseMatDrawer> _dotNetObjectRef;
         public BaseMatDrawer()
         {
             ClassMapper
@@ -54,15 +54,15 @@ namespace MatBlazor
 
             CallAfterRender(async () =>
             {
-                dotNetObjectRef ??= CreateDotNetObjectRef(this);
-                await JsInvokeAsync<object>("matBlazor.matDrawer.init", Ref, dotNetObjectRef);
+                _dotNetObjectRef ??= CreateDotNetObjectRef(this);
+                await JsInvokeAsync<object>("matBlazor.matDrawer.init", Ref, _dotNetObjectRef);
             });
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            DisposeDotNetObjectRef(dotNetObjectRef);
+            DisposeDotNetObjectRef(_dotNetObjectRef);
         }
 
         [JSInvokable]

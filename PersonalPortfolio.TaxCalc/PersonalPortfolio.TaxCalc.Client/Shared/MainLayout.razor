@@ -12,26 +12,7 @@
     <MatAppBarContent>
         <MatDrawerContainer Style="width: 100vw; height: 100vh;">
             <MatDrawer @bind-Opened="@_opened">
-                <MatNavMenu>
-                    <MatRipple>
-                        <MatNavItem Href="/">
-                            <MatIcon Icon="home"/>
-                            &nbsp;Home
-                        </MatNavItem>
-                    </MatRipple>
-                    <MatNavItem Href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple" Target="_blank">
-                        <MatRipple Color="@MatRippleColor.Primary">
-                            <MatIcon Icon="extension" />
-                            &nbsp;MDC Components
-                        </MatRipple>
-                    </MatNavItem>
-                    <MatNavItem Href="https://www.matblazor.com/" Target="_blank">
-                        <MatRipple Color="@MatRippleColor.Secondary">
-                            <MatIcon Icon="extension" />
-                            &nbsp;MatBlazor
-                        </MatRipple>
-                    </MatNavItem>
-                </MatNavMenu>
+                <NavList />
             </MatDrawer>
             <MatDrawerContent>
                 @Body
