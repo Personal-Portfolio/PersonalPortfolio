@@ -1,0 +1,35 @@
+@import '@angular/material/_theming.scss';
+
+@function get-theme-primary($theme) {
+    @return mat-color(map-get($theme, primary));
+}
+
+@function get-theme-secondary($theme) {
+    @return mat-color(map-get($theme, accent));
+}
+
+// @function get-theme-background($theme) {
+//     @return mat-color(map-get($theme, background));
+// }
+
+.mat-view-port {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+  
+  $black-primary: mat-palette($mat-blue-grey, 400);
+  $black-accent: mat-palette($mat-orange, 700, 400, 600);
+  $black-warn: mat-palette($mat-red, 800);
+
+  $black-theme: mat-dark-theme(
+    $black-primary,
+    $black-accent,
+    $black-warn
+  );
+
+$primary: get-theme-primary($black-theme);
+$secondary: get-theme-secondary($black-theme);
+// $secondary: get-theme-background($black-theme);

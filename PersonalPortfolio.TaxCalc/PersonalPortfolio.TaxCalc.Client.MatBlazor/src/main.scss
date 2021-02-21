@@ -1,0 +1,49 @@
+// global css
+@use './theme/dark';
+@use "@material/theme" with (
+  $primary: dark.$primary,
+  $secondary: dark.$secondary,
+  $background: #303030,
+  $surface: #424242
+);
+
+@use './matAppBar/matAppBar';
+@use './matDrawer/matDrawer';
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@import './matAccordion/matAccordion.scss';
+@import './matAutocompleteList/matAutocompleteList.scss';
+@import './matButton/matButton.scss';
+@import './matCard/matCard.scss';
+@import './matCheckbox/matCheckbox.scss';
+@import './matChipSet/matChipSet.scss';
+@import './matDatePicker/matDatePicker.scss';
+@import './matDialog/matDialog.scss';
+@import './matElevation/matElevation.scss';
+@import './matFAB/matFAB.scss';
+@import './matFileUpload/matFileUpload.scss';
+@import './matIconButton/matIconButton.scss';
+@import './matLayoutGrid/matLayoutGrid.scss';
+@import './matList/matList.scss';
+@import './matMenu/matMenu.scss';
+@import './matNavMenu/matNavMenu.scss';
+@import './matNumericUpDownField/matNumericUpDownField.scss';
+@import './matProgressBar/matProgressBar.scss';
+@import './matProgressCircle/matProgressCircle.scss';
+@import './matRadioButton/matRadioButton.scss';
+@import './matRipple/matRipple.scss';
+@import './matSelect/matSelect.scss';
+@import './matSlider/matSlider.scss';
+@import './matSlideToggle/matSlideToggle.scss';
+@import './matSnackbar/matSnackbar.scss';
+@import './matSplitter/matSplitter.scss';
+@import './matTabBar/matTabBar.scss';
+@import './matTable/matTable.scss';
+@import './matTable/matDataTable.scss';
+@import './matTextField/matTextField.scss';
+@import './matToast/matToast.scss';
+@import './matTooltip/matTooltip.scss';
+@import './matTypography/matTypography.scss';
+@import './matVirtualScroll/matVirtualScroll.scss';
